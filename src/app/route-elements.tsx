@@ -8,6 +8,8 @@ const EmployeeListPage = lazy(() => import('@/features/employees/pages/EmployeeL
 const LeaveListPage = lazy(() => import('@/features/leave/pages/LeaveListPage'));
 const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'));
 const NotFoundPage = lazy(() => import('@/features/common/pages/NotFoundPage'));
+const OrganizationPage = lazy(() => import('@/features/organization/pages/OrganizationPage'));
+const ReportsPage = lazy(() => import('@/features/reports/pages/ReportsPage'));
 const UserCreatePage = lazy(() => import('@/features/users/pages/UserCreatePage'));
 const UserDetailPage = lazy(() => import('@/features/users/pages/UserDetailPage'));
 const UserListPage = lazy(() => import('@/features/users/pages/UserListPage'));
@@ -38,6 +40,14 @@ export function LoginRouteElement() {
 
 export function NotFoundRouteElement() {
   return withPageLoading(<NotFoundPage />);
+}
+
+export function OrganizationRouteElement() {
+  return withPageLoading(<OrganizationPage />);
+}
+
+export function ReportsRouteElement() {
+  return withPageLoading(<ReportsPage />);
 }
 
 export function UserCreateRouteElement() {

@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-07-11 00:00+0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: vi\n"
+"Project-Id-Version: hui-hrm\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. placeholder {0}: data.length
+#: src/components/data-display/DataTable.tsx
+msgid "{0} bản ghi trên trang này"
+msgstr "{0} bản ghi trên trang này"
+
+#. placeholder {0}: reportCatalog.length
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "{0} báo cáo tiêu chuẩn khả dụng"
+msgstr "{0} báo cáo tiêu chuẩn khả dụng"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng công"
+msgstr "Bảng công"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng công của tôi"
+msgstr "Bảng công của tôi"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng công nhân viên"
+msgstr "Bảng công nhân viên"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Bảng công tháng"
+msgstr "Bảng công tháng"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng điều khiển"
+msgstr "Bảng điều khiển"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Báo cáo"
+msgstr "Báo cáo"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Các yêu cầu đã gửi, được duyệt hoặc bị từ chối."
+msgstr "Các yêu cầu đã gửi, được duyệt hoặc bị từ chối."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Cài đặt"
+msgstr "Cài đặt"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Chấm công"
+msgstr "Chấm công"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chấm công hằng ngày"
+msgstr "Chấm công hằng ngày"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chạy báo cáo"
+msgstr "Chạy báo cáo"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chạy báo cáo vận hành và xuất dữ liệu nhân sự."
+msgstr "Chạy báo cáo vận hành và xuất dữ liệu nhân sự."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chọn tham số và chạy báo cáo để xem kết quả."
+msgstr "Chọn tham số và chạy báo cáo để xem kết quả."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Chức danh"
+msgstr "Chức danh"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Công cụ"
+msgstr "Công cụ"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Công ty"
+msgstr "Công ty"
+
+#: src/components/data-display/DataTable.tsx
+msgid "Đang tải dữ liệu..."
+msgstr "Đang tải dữ liệu..."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Danh sách nhân viên"
+msgstr "Danh sách nhân viên"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Đặt lại"
+msgstr "Đặt lại"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Đến ngày"
+msgstr "Đến ngày"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Địa điểm"
+msgstr "Địa điểm"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Định dạng đầu ra"
+msgstr "Định dạng đầu ra"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Dữ liệu của tôi"
+msgstr "Dữ liệu của tôi"
+
+#: src/features/users/pages/UserListPage.tsx
+msgid "Dữ liệu người dùng"
+msgstr "Dữ liệu người dùng"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Dữ liệu nhân viên"
+msgstr "Dữ liệu nhân viên"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Giờ làm việc, tăng ca và các mục bảng công đã duyệt."
+msgstr "Giờ làm việc, tăng ca và các mục bảng công đã duyệt."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Giờ vào, giờ ra, đi trễ và trạng thái chấm công."
+msgstr "Giờ vào, giờ ra, đi trễ và trạng thái chấm công."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Hệ thống sẵn sàng"
+msgstr "Hệ thống sẵn sàng"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Hiệu suất"
+msgstr "Hiệu suất"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Hồ sơ nhân viên và thông tin phân bổ trong tổ chức."
+msgstr "Hồ sơ nhân viên và thông tin phân bổ trong tổ chức."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Không gian làm việc"
+msgstr "Không gian làm việc"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Không tìm thấy báo cáo phù hợp."
+msgstr "Không tìm thấy báo cáo phù hợp."
+
+#: src/components/data-display/DataTable.tsx
+msgid "Không tìm thấy dữ liệu."
+msgstr "Không tìm thấy dữ liệu."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Lịch"
+msgstr "Lịch"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Lịch sử yêu cầu nghỉ phép"
+msgstr "Lịch sử yêu cầu nghỉ phép"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Loại nghỉ phép"
+msgstr "Loại nghỉ phép"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Môi trường làm việc"
+msgstr "Môi trường làm việc"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Nghỉ phép"
+msgstr "Nghỉ phép"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Nghỉ phép của tôi"
+msgstr "Nghỉ phép của tôi"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Người dùng"
+msgstr "Người dùng"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Nhân sự"
+msgstr "Nhân sự"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Nhân sự theo phòng ban"
+msgstr "Nhân sự theo phòng ban"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Nhân viên"
+msgstr "Nhân viên"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Nhật ký hệ thống"
+msgstr "Nhật ký hệ thống"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Phân hệ"
+msgstr "Phân hệ"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Phân quyền"
+msgstr "Phân quyền"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Phê duyệt"
+msgstr "Phê duyệt"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Phòng ban"
+msgstr "Phòng ban"
+
+#: src/features/users/pages/UserListPage.tsx
+msgid "Quản lý tài khoản và quyền truy cập hệ thống."
+msgstr "Quản lý tài khoản và quyền truy cập hệ thống."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Quản trị"
+msgstr "Quản trị"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Quản trị nhân sự"
+msgstr "Quản trị nhân sự"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Quyền lợi"
+msgstr "Quyền lợi"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Quyền lợi, số ngày đã dùng và số dư còn lại theo nhân viên."
+msgstr "Quyền lợi, số ngày đã dùng và số dư còn lại theo nhân viên."
+
+#: src/components/data-display/DataTable.tsx
+msgid "Số dòng"
+msgstr "Số dòng"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Số dư phép"
+msgstr "Số dư phép"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Số nhân viên đang làm việc theo phòng ban và địa điểm."
+msgstr "Số nhân viên đang làm việc theo phòng ban và địa điểm."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tài liệu PDF"
+msgstr "Tài liệu PDF"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tất cả"
+msgstr "Tất cả"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tất cả phòng ban"
+msgstr "Tất cả phòng ban"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tệp Excel"
+msgstr "Tệp Excel"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tham số báo cáo"
+msgstr "Tham số báo cáo"
+
+#: src/features/users/pages/UserListPage.tsx
+msgid "Thêm người dùng"
+msgstr "Thêm người dùng"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Thời gian"
+msgstr "Thời gian"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tìm báo cáo..."
+msgstr "Tìm báo cáo..."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Tìm menu hoặc lệnh"
+msgstr "Tìm menu hoặc lệnh"
+
+#: src/components/data-display/DataTable.tsx
+msgid "Tìm trong dữ liệu..."
+msgstr "Tìm trong dữ liệu..."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Tổ chức"
+msgstr "Tổ chức"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tổng hợp số dư phép"
+msgstr "Tổng hợp số dư phép"
+
+#: src/components/data-display/DataTable.tsx
+msgid "Trang"
+msgstr "Trang"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Từ ngày"
+msgstr "Từ ngày"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Tuyển dụng"
+msgstr "Tuyển dụng"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Vai trò"
+msgstr "Vai trò"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Xem trước"
+msgstr "Xem trước"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Xem trước báo cáo"
+msgstr "Xem trước báo cáo"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Yêu cầu"
+msgstr "Yêu cầu"

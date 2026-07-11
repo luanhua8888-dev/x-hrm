@@ -1,0 +1,21 @@
+# Project Rules for HUI HRM
+
+1. **Clean up Test Files:** 
+   - Any test scripts, dump files, or temporary verification files (e.g., `dump.js`, `dump_out.txt`, `check.js`, `test.js`) created during debugging or development must be immediately deleted after the test is completed. Do not leave them lingering in the project directory.
+
+2. **UI/UX Color Palette:**
+   - **No Flashy Colors Without Permission:** Do not use overly bright, rainbow, or "flashy" multi-color gradients for the UI unless explicitly requested by the user.
+   - **Professional Enterprise Aesthetic:** Default to a clean, unified, and professional color scheme (using `slate`, `blue`, and brand colors) suitable for an enterprise web application. Keep the design modern but restrained.
+
+3. **Layout Consistency:**
+   - Avoid redundant headers if the page title is already clearly indicated in the `BreadcrumbBar` or standard layout components.
+
+4. **Shared Data UI:**
+   - Data pages must use the shared `TableCustom` and `FilterCustom` components from `src/features/common/components`.
+   - `TableCustom` must include an automatic row-number column, per-column filters, pagination, loading and empty states.
+   - Wide tables must support horizontal scrolling with the scrollbar visually hidden. Identification columns should be pinned left and action columns pinned right.
+   - `FilterCustom` must remain compact. Advanced filters are collapsed by default and expand only when requested.
+
+5. **Internationalization:**
+   - Every user-visible string on new or changed pages and shared components must support both Vietnamese and English.
+   - Labels, placeholders, empty states, accessibility labels, table headers, filters, buttons and statuses must all react to the active locale.

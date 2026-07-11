@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-07-11 00:00+0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: hui-hrm\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. placeholder {0}: data.length
+#: src/components/data-display/DataTable.tsx
+msgid "{0} bản ghi trên trang này"
+msgstr "{0} records on this page"
+
+#. placeholder {0}: reportCatalog.length
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "{0} báo cáo tiêu chuẩn khả dụng"
+msgstr "{0} standard reports available"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng công"
+msgstr "Timesheets"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng công của tôi"
+msgstr "My timesheet"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng công nhân viên"
+msgstr "Employee timesheets"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Bảng công tháng"
+msgstr "Monthly timesheet"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Bảng điều khiển"
+msgstr "Dashboard"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Báo cáo"
+msgstr "Reports"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Các yêu cầu đã gửi, được duyệt hoặc bị từ chối."
+msgstr "Submitted, approved and rejected leave requests."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Cài đặt"
+msgstr "Settings"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Chấm công"
+msgstr "Attendance"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chấm công hằng ngày"
+msgstr "Daily attendance"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chạy báo cáo"
+msgstr "Run report"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chạy báo cáo vận hành và xuất dữ liệu nhân sự."
+msgstr "Run operational reports and export HR data."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Chọn tham số và chạy báo cáo để xem kết quả."
+msgstr "Select parameters and run the report to view results."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Chức danh"
+msgstr "Job titles"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Công cụ"
+msgstr "Tools"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Công ty"
+msgstr "Company"
+
+#: src/components/data-display/DataTable.tsx
+msgid "Đang tải dữ liệu..."
+msgstr "Loading records..."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Danh sách nhân viên"
+msgstr "Employee directory"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Đặt lại"
+msgstr "Reset"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Đến ngày"
+msgstr "To date"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Địa điểm"
+msgstr "Locations"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Định dạng đầu ra"
+msgstr "Output format"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Dữ liệu của tôi"
+msgstr "My records"
+
+#: src/features/users/pages/UserListPage.tsx
+msgid "Dữ liệu người dùng"
+msgstr "User master data"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Dữ liệu nhân viên"
+msgstr "Employee records"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Giờ làm việc, tăng ca và các mục bảng công đã duyệt."
+msgstr "Working hours, overtime and approved timesheet entries."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Giờ vào, giờ ra, đi trễ và trạng thái chấm công."
+msgstr "Check-in, check-out, lateness and attendance status."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Hệ thống sẵn sàng"
+msgstr "System ready"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Hiệu suất"
+msgstr "Performance"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Hồ sơ nhân viên và thông tin phân bổ trong tổ chức."
+msgstr "Employee profiles and organizational assignments."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Không gian làm việc"
+msgstr "Workspace"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Không tìm thấy báo cáo phù hợp."
+msgstr "No matching reports."
+
+#: src/components/data-display/DataTable.tsx
+msgid "Không tìm thấy dữ liệu."
+msgstr "No records found."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Lịch"
+msgstr "Calendar"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Lịch sử yêu cầu nghỉ phép"
+msgstr "Leave request history"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Loại nghỉ phép"
+msgstr "Leave types"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Môi trường làm việc"
+msgstr "Production workspace"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Nghỉ phép"
+msgstr "Leave"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Nghỉ phép của tôi"
+msgstr "My leave"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Người dùng"
+msgstr "Users"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Nhân sự"
+msgstr "People"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Nhân sự theo phòng ban"
+msgstr "Headcount by department"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Nhân viên"
+msgstr "Employees"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Nhật ký hệ thống"
+msgstr "Audit logs"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Phân hệ"
+msgstr "Modules"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Phân quyền"
+msgstr "Permissions"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Phê duyệt"
+msgstr "Approvals"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Phòng ban"
+msgstr "Departments"
+
+#: src/features/users/pages/UserListPage.tsx
+msgid "Quản lý tài khoản và quyền truy cập hệ thống."
+msgstr "Manage application accounts and access."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Quản trị"
+msgstr "Administration"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Quản trị nhân sự"
+msgstr "Human resources"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Quyền lợi"
+msgstr "Entitlements"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Quyền lợi, số ngày đã dùng và số dư còn lại theo nhân viên."
+msgstr "Entitlement, used days and remaining balance by employee."
+
+#: src/components/data-display/DataTable.tsx
+msgid "Số dòng"
+msgstr "Rows"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Số dư phép"
+msgstr "Leave balances"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Số nhân viên đang làm việc theo phòng ban và địa điểm."
+msgstr "Active headcount grouped by department and location."
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tài liệu PDF"
+msgstr "PDF document"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tất cả"
+msgstr "All"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tất cả phòng ban"
+msgstr "All departments"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tệp Excel"
+msgstr "Excel workbook"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tham số báo cáo"
+msgstr "Report parameters"
+
+#: src/features/users/pages/UserListPage.tsx
+msgid "Thêm người dùng"
+msgstr "New user"
+
+#: src/features/reports/pages/ReportsPage.tsx
+#: src/layouts/DashboardLayout.tsx
+msgid "Thời gian"
+msgstr "Time"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tìm báo cáo..."
+msgstr "Find a report..."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Tìm menu hoặc lệnh"
+msgstr "Search menu or command"
+
+#: src/components/data-display/DataTable.tsx
+msgid "Tìm trong dữ liệu..."
+msgstr "Find in records..."
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Tổ chức"
+msgstr "Organization"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Tổng hợp số dư phép"
+msgstr "Leave balance summary"
+
+#: src/components/data-display/DataTable.tsx
+msgid "Trang"
+msgstr "Page"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Từ ngày"
+msgstr "From date"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Tuyển dụng"
+msgstr "Recruitment"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Vai trò"
+msgstr "Roles"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Xem trước"
+msgstr "Preview"
+
+#: src/features/reports/pages/ReportsPage.tsx
+msgid "Xem trước báo cáo"
+msgstr "Report preview"
+
+#: src/layouts/DashboardLayout.tsx
+msgid "Yêu cầu"
+msgstr "Requests"

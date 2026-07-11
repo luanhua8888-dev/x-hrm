@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/utils/cn';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-type ButtonSize = 'sm' | 'md' | 'icon';
+type ButtonSize = 'sm' | 'md' | 'icon' | 'compact-icon';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -21,6 +21,7 @@ const sizeClasses: Record<ButtonSize, string> = {
   sm: 'h-8 px-3 text-sm',
   md: 'h-10 px-4 text-sm',
   icon: 'h-10 w-10 p-0',
+  'compact-icon': 'h-8 w-8 p-0',
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

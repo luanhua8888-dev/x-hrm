@@ -7,6 +7,8 @@ import {
   LeaveListRouteElement,
   LoginRouteElement,
   NotFoundRouteElement,
+  OrganizationRouteElement,
+  ReportsRouteElement,
   UserCreateRouteElement,
   UserDetailRouteElement,
   UserListRouteElement,
@@ -18,13 +20,14 @@ import DashboardLayout from '@/layouts/DashboardLayout';
 import PermissionRoute from '@/routes/PermissionRoute';
 import ProtectedRoute from '@/routes/ProtectedRoute';
 
-const organizationPage = (
-  <ModulePage capabilities={['Company information', 'Departments', 'Locations', 'Job titles']} />
-);
-
 const attendancePage = (
   <ModulePage
-    capabilities={['Punch records', 'My attendance', 'Employee attendance', 'Attendance adjustments']}
+    capabilities={[
+      'Punch records',
+      'My attendance',
+      'Employee attendance',
+      'Attendance adjustments',
+    ]}
   />
 );
 
@@ -33,15 +36,13 @@ const timesheetPage = (
 );
 
 const recruitmentPage = (
-  <ModulePage capabilities={['Vacancies', 'Candidates', 'Applications', 'Interviews', 'Hire or reject']} />
+  <ModulePage
+    capabilities={['Vacancies', 'Candidates', 'Applications', 'Interviews', 'Hire or reject']}
+  />
 );
 
 const performancePage = (
   <ModulePage capabilities={['KPI configuration', 'Goals', 'Reviews', 'Appraisals']} />
-);
-
-const reportsPage = (
-  <ModulePage capabilities={['Employee reports', 'Leave reports', 'Attendance reports', 'Saved criteria']} />
 );
 
 const administrationPage = (
@@ -79,11 +80,11 @@ export const router = createBrowserRouter([
           {
             element: <PermissionRoute permission={PERMISSIONS.ORGANIZATION_VIEW} />,
             children: [
-              { path: '/organization', element: organizationPage },
-              { path: '/organization/company', element: organizationPage },
-              { path: '/organization/departments', element: organizationPage },
-              { path: '/organization/locations', element: organizationPage },
-              { path: '/organization/job-titles', element: organizationPage },
+              { path: '/organization', element: <OrganizationRouteElement /> },
+              { path: '/organization/company', element: <OrganizationRouteElement /> },
+              { path: '/organization/departments', element: <OrganizationRouteElement /> },
+              { path: '/organization/locations', element: <OrganizationRouteElement /> },
+              { path: '/organization/job-titles', element: <OrganizationRouteElement /> },
             ],
           },
           {
@@ -171,7 +172,7 @@ export const router = createBrowserRouter([
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.REPORT_VIEW} />,
-            children: [{ path: '/reports', element: reportsPage }],
+            children: [{ path: '/reports', element: <ReportsRouteElement /> }],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.SYSTEM_ADMIN} />,
