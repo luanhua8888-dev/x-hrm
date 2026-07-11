@@ -1,4 +1,4 @@
-import { PERMISSIONS, Permission } from '@/config/permissions';
+import { PERMISSIONS } from '@/config/permissions';
 import { AuthSession } from '@/types/auth/auth';
 
 /**
@@ -24,6 +24,6 @@ export const MOCK_SESSION: AuthSession = {
     email: 'admin@hrm.local',
     fullName: 'Administrator',
     employeeId: undefined,
-    permissions: Object.values(PERMISSIONS) as Permission[],
+    permissions: Object.values(PERMISSIONS),
   },
 };

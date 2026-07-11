@@ -1,16 +1,18 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
+import {
+  AccessDeniedRouteElement,
+  DashboardRouteElement,
+  EmployeeListRouteElement,
+  LeaveListRouteElement,
+  LoginRouteElement,
+  NotFoundRouteElement,
+  UserCreateRouteElement,
+  UserDetailRouteElement,
+  UserListRouteElement,
+} from '@/app/route-elements';
 import { PERMISSIONS } from '@/config/permissions';
-import AccessDeniedPage from '@/features/common/pages/AccessDeniedPage';
 import ModulePage from '@/features/common/pages/ModulePage';
-import NotFoundPage from '@/features/common/pages/NotFoundPage';
-import DashboardPage from '@/features/dashboard/pages/DashboardPage';
-import EmployeeListPage from '@/features/employees/pages/EmployeeListPage';
-import LeaveListPage from '@/features/leave/pages/LeaveListPage';
-import LoginPage from '@/features/auth/pages/LoginPage';
-import UserCreatePage from '@/features/users/pages/UserCreatePage';
-import UserDetailPage from '@/features/users/pages/UserDetailPage';
-import UserListPage from '@/features/users/pages/UserListPage';
 import AuthLayout from '@/layouts/AuthLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import PermissionRoute from '@/routes/PermissionRoute';
@@ -56,7 +58,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/login',
-        element: <LoginPage />,
+        element: <LoginRouteElement />,
       },
     ],
   },
@@ -68,11 +70,11 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '/access-denied',
-            element: <AccessDeniedPage />,
+            element: <AccessDeniedRouteElement />,
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.DASHBOARD_VIEW} />,
-            children: [{ path: '/dashboard', element: <DashboardPage /> }],
+            children: [{ path: '/dashboard', element: <DashboardRouteElement /> }],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.ORGANIZATION_VIEW} />,
@@ -87,39 +89,45 @@ export const router = createBrowserRouter([
           {
             element: <PermissionRoute permission={PERMISSIONS.USER_VIEW} />,
             children: [
-              { path: '/users', element: <UserListPage /> },
-              { path: '/users/:userId', element: <UserDetailPage /> },
+              { path: '/users', element: <UserListRouteElement /> },
+              { path: '/users/:userId', element: <UserDetailRouteElement /> },
             ],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.USER_CREATE} />,
-            children: [{ path: '/users/new', element: <UserCreatePage /> }],
+            children: [{ path: '/users/new', element: <UserCreateRouteElement /> }],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.EMPLOYEE_VIEW} />,
             children: [
-              { path: '/employees', element: <EmployeeListPage /> },
-              { path: '/employees/new', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/personal', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/contact', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/emergency-contacts', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/job', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/salary', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/documents', element: <EmployeeListPage /> },
-              { path: '/employees/:employeeId/employment-history', element: <EmployeeListPage /> },
+              { path: '/employees', element: <EmployeeListRouteElement /> },
+              { path: '/employees/new', element: <EmployeeListRouteElement /> },
+              { path: '/employees/:employeeId', element: <EmployeeListRouteElement /> },
+              { path: '/employees/:employeeId/personal', element: <EmployeeListRouteElement /> },
+              { path: '/employees/:employeeId/contact', element: <EmployeeListRouteElement /> },
+              {
+                path: '/employees/:employeeId/emergency-contacts',
+                element: <EmployeeListRouteElement />,
+              },
+              { path: '/employees/:employeeId/job', element: <EmployeeListRouteElement /> },
+              { path: '/employees/:employeeId/salary', element: <EmployeeListRouteElement /> },
+              { path: '/employees/:employeeId/documents', element: <EmployeeListRouteElement /> },
+              {
+                path: '/employees/:employeeId/employment-history',
+                element: <EmployeeListRouteElement />,
+              },
             ],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.LEAVE_VIEW} />,
             children: [
-              { path: '/leave', element: <LeaveListPage /> },
-              { path: '/leave/my-leave', element: <LeaveListPage /> },
-              { path: '/leave/requests', element: <LeaveListPage /> },
-              { path: '/leave/calendar', element: <LeaveListPage /> },
-              { path: '/leave/balances', element: <LeaveListPage /> },
-              { path: '/leave/types', element: <LeaveListPage /> },
-              { path: '/leave/entitlements', element: <LeaveListPage /> },
+              { path: '/leave', element: <LeaveListRouteElement /> },
+              { path: '/leave/my-leave', element: <LeaveListRouteElement /> },
+              { path: '/leave/requests', element: <LeaveListRouteElement /> },
+              { path: '/leave/calendar', element: <LeaveListRouteElement /> },
+              { path: '/leave/balances', element: <LeaveListRouteElement /> },
+              { path: '/leave/types', element: <LeaveListRouteElement /> },
+              { path: '/leave/entitlements', element: <LeaveListRouteElement /> },
             ],
           },
           {
@@ -177,7 +185,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '*',
-            element: <NotFoundPage />,
+            element: <NotFoundRouteElement />,
           },
         ],
       },

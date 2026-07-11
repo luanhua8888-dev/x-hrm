@@ -11,9 +11,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-
-import { Badge } from '@/components/ui/badge';
-
 const metricCards = [
   { label: 'Total employees', value: '—', icon: Users },
   { label: 'Active employees', value: '—', icon: UserCheck },

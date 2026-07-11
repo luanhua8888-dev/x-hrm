@@ -48,18 +48,15 @@ function PageBreadcrumb() {
 // ─── Collapsed flyout popup (shows on hover when sidebar is collapsed) ───────
 function CollapsedFlyout({
   item,
-  anchorRef,
+  top,
   onMouseEnter,
   onMouseLeave,
 }: {
   item: NavigationItem;
-  anchorRef: React.RefObject<HTMLDivElement | null>;
+  top: number;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }) {
-  const rect = anchorRef.current?.getBoundingClientRect();
-  const top = rect ? rect.top : 0;
-
   return (
     <div
       className="fixed z-50"
@@ -99,14 +96,11 @@ function CollapsedFlyout({
 // ─── Collapsed tooltip (shows item name on hover for leaf items) ──────────────
 function CollapsedTooltip({
   title,
-  anchorRef,
+  top,
 }: {
   title: string;
-  anchorRef: React.RefObject<HTMLDivElement | null>;
+  top: number;
 }) {
-  const rect = anchorRef.current?.getBoundingClientRect();
-  const top = rect ? rect.top + rect.height / 2 : 0;
-
   return (
     <div
       className="pointer-events-none fixed z-50 ml-2"
@@ -138,11 +132,19 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const [hovered, setHovered] = useState(false);
+  const [anchorPosition, setAnchorPosition] = useState({ flyoutTop: 0, tooltipTop: 0 });
   const anchorRef = useRef<HTMLDivElement>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showFlyout = () => {
     if (hideTimer.current) clearTimeout(hideTimer.current);
+    const rect = anchorRef.current?.getBoundingClientRect();
+    if (rect) {
+      setAnchorPosition({
+        flyoutTop: rect.top,
+        tooltipTop: rect.top + rect.height / 2,
+      });
+    }
     setHovered(true);
   };
 
@@ -245,13 +247,13 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
       {isCollapsed && hovered && hasChildren && (
         <CollapsedFlyout
           item={item}
-          anchorRef={anchorRef}
+          top={anchorPosition.flyoutTop}
           onMouseEnter={showFlyout}
           onMouseLeave={hideFlyout}
         />
       )}
       {isCollapsed && hovered && !hasChildren && (
-        <CollapsedTooltip title={item.title} anchorRef={anchorRef} />
+        <CollapsedTooltip title={item.title} top={anchorPosition.tooltipTop} />
       )}
     </div>
   );
@@ -270,7 +272,9 @@ export default function DashboardLayout() {
 
   const handleLogout = () => {
     logout.mutate(undefined, {
-      onSettled: () => navigate('/login', { replace: true }),
+      onSettled: () => {
+        void navigate('/login', { replace: true });
+      },
     });
   };
 
@@ -288,7 +292,7 @@ export default function DashboardLayout() {
         )}
       >
         {!isCollapsed ? (
-          <span className="text-base font-semibold text-brand-primary-text">HRM Web</span>
+          <span className="text-base font-semibold text-brand-primary-text">HUI HRM</span>
         ) : null}
         <Button variant="ghost" size="icon" onClick={toggleSidebar} aria-label="Toggle sidebar">
           {isCollapsed ? (
@@ -348,7 +352,7 @@ export default function DashboardLayout() {
           <div className="absolute inset-0 bg-slate-950/40" onClick={() => setMobileOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-80 max-w-[85vw] bg-white shadow-xl">
             <div className="flex h-16 items-center justify-between border-b border-brand-border px-4">
-              <span className="text-base font-semibold text-brand-primary-text">HRM Web</span>
+              <span className="text-base font-semibold text-brand-primary-text">HUI HRM</span>
               <Button variant="ghost" size="icon" onClick={() => setMobileOpen(false)}>
                 <X className="h-5 w-5" />
               </Button>
