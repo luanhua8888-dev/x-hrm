@@ -7,7 +7,7 @@ import { ErrorState } from '@/components/feedback/ErrorState';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CreateUserFormValues, createUserSchema } from '@/features/users/schemas/user.schema';
+import { CreateUserFormValues, createUserSchema } from '@/components/users/create/user.schema';
 import { useCreateUser } from '@/queries/user.query';
 
 export default function UserCreatePage() {

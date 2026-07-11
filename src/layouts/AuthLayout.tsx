@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Component as InfiniteGridBackground } from '@/components/ui/the-infinite-grid';
-
+import { Component as InfiniteGridBackground } from '@/components/ui/TheInfiniteGrid';
 
 export default function AuthLayout() {
   return (
@@ -14,8 +13,3 @@ export default function AuthLayout() {
     </InfiniteGridBackground>
   );
 }
-
-
-
-
-

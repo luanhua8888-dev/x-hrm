@@ -14,7 +14,7 @@ import {
   UserListRouteElement,
 } from '@/app/route-elements';
 import { PERMISSIONS } from '@/config/permissions';
-import ModulePage from '@/features/common/pages/ModulePage';
+import ModulePage from '@/components/common/ModulePage';
 import AuthLayout from '@/layouts/AuthLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import PermissionRoute from '@/routes/PermissionRoute';

@@ -9,6 +9,16 @@ export interface Employee {
   middleName?: string;
   lastName: string;
   preferredName?: string;
+  email?: string;
+  phone?: string;
+  gender?: 'MALE' | 'FEMALE' | 'OTHER';
+  dateOfBirth?: string;
+  nationalId?: string;
+  workType?: 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERN';
+  employmentType?: 'PERMANENT' | 'FIXED_TERM' | 'TEMPORARY' | 'INTERN';
+  contractEndDate?: string;
+  maritalStatus?: 'SINGLE' | 'MARRIED' | 'DIVORCED' | 'WIDOWED';
+  address?: string;
   status: EmployeeStatus;
   jobTitle?: string;
   department?: string;

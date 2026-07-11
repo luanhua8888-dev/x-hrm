@@ -11,7 +11,7 @@ describe('filterNavigationByPermissions', () => {
     ]);
 
     expect(result.map((item) => item.title)).toContain('Dashboard');
-    expect(result.map((item) => item.title)).toContain('People');
+    expect(result.map((item) => item.title)).toContain('Employees');
     expect(result.map((item) => item.title)).not.toContain('Administration');
   });
 });

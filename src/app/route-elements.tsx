@@ -2,17 +2,17 @@ import { lazy, Suspense, type ReactNode } from 'react';
 
 import { PageLoading } from '@/components/feedback/PageLoading';
 
-const AccessDeniedPage = lazy(() => import('@/features/common/pages/AccessDeniedPage'));
-const DashboardPage = lazy(() => import('@/features/dashboard/pages/DashboardPage'));
-const EmployeeListPage = lazy(() => import('@/features/employees/pages/EmployeeListPage'));
-const LeaveListPage = lazy(() => import('@/features/leave/pages/LeaveListPage'));
-const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage'));
-const NotFoundPage = lazy(() => import('@/features/common/pages/NotFoundPage'));
-const OrganizationPage = lazy(() => import('@/features/organization/pages/OrganizationPage'));
-const ReportsPage = lazy(() => import('@/features/reports/pages/ReportsPage'));
-const UserCreatePage = lazy(() => import('@/features/users/pages/UserCreatePage'));
-const UserDetailPage = lazy(() => import('@/features/users/pages/UserDetailPage'));
-const UserListPage = lazy(() => import('@/features/users/pages/UserListPage'));
+const AccessDeniedPage = lazy(() => import('@/components/common/AccessDeniedPage'));
+const DashboardPage = lazy(() => import('@/components/dashboard/DashboardPage'));
+const EmployeeListPage = lazy(() => import('@/components/employees/list/EmployeeListPage'));
+const LeaveListPage = lazy(() => import('@/components/leave/LeaveListPage'));
+const LoginPage = lazy(() => import('@/components/login/LoginPage'));
+const NotFoundPage = lazy(() => import('@/components/common/NotFoundPage'));
+const OrganizationPage = lazy(() => import('@/components/organization/OrganizationPage'));
+const ReportsPage = lazy(() => import('@/components/reports/ReportsPage'));
+const UserCreatePage = lazy(() => import('@/components/users/create/UserCreatePage'));
+const UserDetailPage = lazy(() => import('@/components/users/detail/UserDetailPage'));
+const UserListPage = lazy(() => import('@/components/users/list/UserListPage'));
 
 function withPageLoading(element: ReactNode) {
   return <Suspense fallback={<PageLoading />}>{element}</Suspense>;

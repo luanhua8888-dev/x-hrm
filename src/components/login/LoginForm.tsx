@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useLogin } from '@/queries/auth.query';
-import { LoginFormValues, loginSchema } from '@/features/auth/schemas/login.schema';
+import { LoginFormValues, loginSchema } from '@/components/login/login.schema';
 
 interface LoginFormProps {
   currentLang: 'EN' | 'VI';
@@ -44,7 +44,8 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
       login: 'Login',
       authenticating: 'Authenticating…',
       failed: 'Authentication Failed',
-      failedDesc: 'Please verify your username and password. If the problem persists, contact your system administrator.',
+      failedDesc:
+        'Please verify your username and password. If the problem persists, contact your system administrator.',
       placeholderUser: 'Enter your username…',
       username_required: 'Username is required.',
       password_required: 'Password is required.',
@@ -59,7 +60,8 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
       login: 'Đăng nhập',
       authenticating: 'Đang xác thực…',
       failed: 'Đăng nhập thất bại',
-      failedDesc: 'Vui lòng kiểm tra lại tài khoản và mật khẩu. Nếu vấn đề tiếp tục xảy ra, vui lòng liên hệ quản trị viên.',
+      failedDesc:
+        'Vui lòng kiểm tra lại tài khoản và mật khẩu. Nếu vấn đề tiếp tục xảy ra, vui lòng liên hệ quản trị viên.',
       placeholderUser: 'Nhập tên đăng nhập…',
       username_required: 'Tên đăng nhập là bắt buộc.',
       password_required: 'Mật khẩu là bắt buộc.',
@@ -79,21 +81,20 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
         <h1 className="text-[32px] font-black tracking-tight leading-none text-slate-900">
           {t.hi}
         </h1>
-        <p className="mt-2.5 text-sm text-slate-500 font-medium">
-          {t.welcome}
-        </p>
+        <p className="mt-2.5 text-sm text-slate-500 font-medium">{t.welcome}</p>
       </div>
 
       {/* Error State Banner */}
       {login.error ? (
-        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 animate-in fade-in duration-300" aria-live="polite">
+        <div
+          className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 animate-in fade-in duration-300"
+          aria-live="polite"
+        >
           <div className="flex gap-3">
             <AlertCircle className="h-5 w-5 shrink-0 text-red-600 mt-0.5" aria-hidden="true" />
             <div className="space-y-1">
               <h5 className="font-semibold leading-none">{t.failed}</h5>
-              <p className="text-xs text-red-600/90 mt-1 leading-relaxed">
-                {t.failedDesc}
-              </p>
+              <p className="text-xs text-red-600/90 mt-1 leading-relaxed">{t.failedDesc}</p>
             </div>
           </div>
         </div>
@@ -114,7 +115,10 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
             {t.username}
           </Label>
           <div className="relative">
-            <User className="absolute top-4 left-3.5 h-4 w-4 text-brand-secondary-text/50 pointer-events-none" aria-hidden="true" />
+            <User
+              className="absolute top-4 left-3.5 h-4 w-4 text-brand-secondary-text/50 pointer-events-none"
+              aria-hidden="true"
+            />
             <Input
               id="username"
               autoComplete="username"
@@ -125,7 +129,10 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
             />
           </div>
           {form.formState.errors.username ? (
-            <p className="text-xs text-red-600 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-200" aria-live="polite">
+            <p
+              className="text-xs text-red-600 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-200"
+              aria-live="polite"
+            >
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {getErrorMessage(form.formState.errors.username.message)}
             </p>
@@ -140,7 +147,10 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
             {t.password}
           </Label>
           <div className="relative">
-            <KeyRound className="absolute top-4 left-3.5 h-4 w-4 text-brand-secondary-text/50 pointer-events-none" aria-hidden="true" />
+            <KeyRound
+              className="absolute top-4 left-3.5 h-4 w-4 text-brand-secondary-text/50 pointer-events-none"
+              aria-hidden="true"
+            />
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
@@ -155,11 +165,7 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
               className="absolute right-3.5 top-4 text-brand-secondary-text/50 hover:text-brand-secondary-text/80 active:scale-95 transition-all cursor-pointer"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              {showPassword ? (
-                <EyeOff className="h-4 w-4" />
-              ) : (
-                <Eye className="h-4 w-4" />
-              )}
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
           <div className="flex justify-end mt-1.5">
@@ -172,7 +178,10 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
             </a>
           </div>
           {form.formState.errors.password ? (
-            <p className="text-xs text-red-600 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-200" aria-live="polite">
+            <p
+              className="text-xs text-red-600 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-200"
+              aria-live="polite"
+            >
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {getErrorMessage(form.formState.errors.password.message)}
             </p>

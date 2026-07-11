@@ -11,6 +11,7 @@ import {
   Shield,
   TableProperties,
   Users,
+  UserRound,
 } from 'lucide-react';
 
 import { hasPermission, Permission, PERMISSIONS } from '@/config/permissions';
@@ -59,14 +60,16 @@ export const navigationItems: NavigationItem[] = [
     ],
   },
   {
-    title: 'People',
+    title: 'Employees',
     path: '/employees',
     icon: Users,
     permission: PERMISSIONS.EMPLOYEE_VIEW,
-    children: [
-      { title: 'Employees', path: '/employees', permission: PERMISSIONS.EMPLOYEE_VIEW },
-      { title: 'Users', path: '/users', permission: PERMISSIONS.USER_VIEW },
-    ],
+  },
+  {
+    title: 'Users',
+    path: '/users',
+    icon: UserRound,
+    permission: PERMISSIONS.USER_VIEW,
   },
   {
     title: 'Leave',

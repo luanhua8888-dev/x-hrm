@@ -4,9 +4,10 @@ import { Plus } from 'lucide-react';
 import { useMemo, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { DataTable } from '@/components/data-display/DataTable';
+import { FilterCustom } from '@/components/common/FilterCustom';
+import { TableCustom } from '@/components/common/TableCustom';
 import { ErrorState } from '@/components/feedback/ErrorState';
-import { userTableColumns } from '@/features/users/components/UserTableColumns';
+import { userTableColumns } from '@/components/users/list/UserTableColumns';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { useUsers } from '@/queries/user.query';
 import { GetAllUserParams } from '@/types/user/user';
@@ -32,6 +33,7 @@ function toText(children: ReactNode) {
 }
 
 export default function UserListPage() {
+  const { i18n } = useLingui();
   const [keyword, setKeyword] = useState('');
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -74,7 +76,20 @@ export default function UserListPage() {
 
       {usersQuery.error ? <ErrorState error={usersQuery.error} /> : null}
 
-      <DataTable
+      <FilterCustom
+        keyword={keyword}
+        onKeywordChange={(value) => {
+          setKeyword(value);
+          setPagination((current) => ({ ...current, pageIndex: 0 }));
+        }}
+        onReset={() => {
+          setKeyword('');
+          setPagination((current) => ({ ...current, pageIndex: 0 }));
+        }}
+        placeholder={i18n.locale === 'en' ? 'Search users...' : 'Tìm kiếm người dùng...'}
+      />
+
+      <TableCustom
         columns={userTableColumns}
         data={usersQuery.data?.items ?? []}
         pageCount={pageCount}
@@ -84,10 +99,7 @@ export default function UserListPage() {
         isLoading={usersQuery.isLoading}
         onPaginationChange={setPagination}
         onSortingChange={setSorting}
-        onKeywordChange={(value) => {
-          setKeyword(value);
-          setPagination((current) => ({ ...current, pageIndex: 0 }));
-        }}
+        showColumnFilters={false}
       />
     </div>
   );

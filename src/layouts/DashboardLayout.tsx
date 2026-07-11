@@ -59,7 +59,6 @@ const navigationMessages: Record<string, MessageDescriptor> = {
   Departments: msg({ message: 'Phòng ban' }),
   Locations: msg({ message: 'Địa điểm' }),
   'Job Titles': msg({ message: 'Chức danh' }),
-  People: msg({ message: 'Nhân sự' }),
   Employees: msg({ message: 'Nhân viên' }),
   Users: msg({ message: 'Người dùng' }),
   Leave: msg({ message: 'Nghỉ phép' }),
@@ -102,6 +101,7 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
   const itemTitle = navigationMessages[item.title]
     ? i18n._(navigationMessages[item.title])
     : item.title;
+  const itemTextClass = 'text-sm font-medium leading-5';
 
   if (isCollapsed) {
     return (
@@ -130,10 +130,8 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
           type="button"
           onClick={() => setIsOpen((current) => !current)}
           className={cn(
-            'flex h-9 w-full items-center gap-2.5 rounded-lg px-2 text-left text-[13px] transition-all',
-            isChildActive
-              ? 'bg-primary/10 font-semibold text-primary'
-              : 'text-slate-700 hover:bg-slate-100',
+            'flex h-9 w-full items-center gap-2.5 rounded-lg px-2 text-left transition-all',
+            isChildActive ? 'bg-primary/10 text-primary' : 'text-slate-700 hover:bg-slate-100',
           )}
           aria-expanded={isOpen}
         >
@@ -145,7 +143,7 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
               )}
             />
           ) : null}
-          <span className="flex-1 truncate">{itemTitle}</span>
+          <span className={cn('flex-1 truncate', itemTextClass)}>{itemTitle}</span>
           <ChevronRight
             className={cn(
               'h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform duration-200',
@@ -157,10 +155,8 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
         <NavLink
           to={item.path}
           className={cn(
-            'flex h-9 items-center gap-2.5 rounded-lg px-2 text-[13px] transition-all',
-            isActive
-              ? 'bg-primary/10 font-semibold text-primary'
-              : 'text-slate-700 hover:bg-slate-100',
+            'flex h-9 items-center gap-2.5 rounded-lg px-2 transition-all',
+            isActive ? 'bg-primary/10 text-primary' : 'text-slate-700 hover:bg-slate-100',
           )}
         >
           {Icon ? (
@@ -171,7 +167,7 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
               )}
             />
           ) : null}
-          <span className="flex-1 truncate">{itemTitle}</span>
+          <span className={cn('flex-1 truncate', itemTextClass)}>{itemTitle}</span>
         </NavLink>
       )}
 
@@ -184,9 +180,9 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
               to={child.path}
               className={({ isActive: childIsActive }) =>
                 cn(
-                  'relative mx-2 flex h-8 items-center rounded-md pl-9 pr-2 text-[13px] transition-all',
+                  'relative mx-2 flex h-8 items-center rounded-md pl-9 pr-2 transition-all',
                   childIsActive
-                    ? 'bg-primary/10 font-semibold text-primary'
+                    ? 'bg-primary/10 text-primary'
                     : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900',
                 )
               }
@@ -199,7 +195,7 @@ function NavigationLink({ item, isCollapsed }: { item: NavigationItem; isCollaps
                       childIsActive ? 'bg-primary' : 'bg-slate-300',
                     )}
                   />
-                  <span className="truncate">
+                  <span className={cn('truncate', itemTextClass)}>
                     {navigationMessages[child.title]
                       ? i18n._(navigationMessages[child.title])
                       : child.title}
@@ -473,7 +469,7 @@ export default function DashboardLayout() {
     >
       <div className="flex h-10 items-center justify-between border-b border-brand-border bg-slate-50 px-2">
         {!isCollapsed ? (
-          <span className="px-2 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+          <span className="px-2 text-[11px] font-medium uppercase tracking-widest text-slate-400">
             <Trans>Phân hệ</Trans>
           </span>
         ) : null}
@@ -524,10 +520,10 @@ export default function DashboardLayout() {
                 H
               </div>
               <div className="hidden flex-col sm:flex">
-                <div className="text-[13px] font-bold leading-tight tracking-tight text-slate-800">
+                <div className="text-sm font-semibold leading-tight tracking-tight text-slate-800">
                   HUI HRM
                 </div>
-                <div className="text-[10px] font-medium leading-tight text-slate-500">
+                <div className="text-xs font-medium leading-tight text-slate-500">
                   <Trans>Quản trị nhân sự</Trans>
                 </div>
               </div>
