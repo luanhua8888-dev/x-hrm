@@ -13,7 +13,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ChevronLeft, ChevronRight, ChevronsUpDown, Inbox, Search } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsUpDown,
+  ChevronUp,
+  ChevronDown,
+  Inbox,
+  Search,
+} from 'lucide-react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/cn';
@@ -107,7 +116,7 @@ export function TableCustom<TData>({
   emptyDescription,
   fixedLeft = [],
   fixedRight = [],
-  showColumnFilters = true,
+  showColumnFilters = false,
   pageCount,
   pagination,
   sorting,
@@ -116,6 +125,10 @@ export function TableCustom<TData>({
 }: TableCustomProps<TData>) {
   const { i18n } = useLingui();
   const t = copy[i18n.locale === 'en' ? 'en' : 'vi'];
+  const [internalSorting, setInternalSorting] = useState<SortingState>([]);
+  const resolvedSorting = sorting ?? internalSorting;
+  const resolvedOnSortingChange = onSortingChange ?? setInternalSorting;
+
   const tableColumns: ColumnDef<TData>[] = [
     {
       id: '__index',
@@ -141,14 +154,14 @@ export function TableCustom<TData>({
       globalFilter: keyword,
       columnPinning: { left: ['__index', ...fixedLeft], right: fixedRight },
       ...(pagination ? { pagination } : {}),
-      ...(sorting ? { sorting } : {}),
+      sorting: resolvedSorting,
     },
     pageCount,
     manualPagination: Boolean(onPaginationChange),
     manualSorting: Boolean(onSortingChange),
     manualFiltering: Boolean(onPaginationChange),
     onPaginationChange,
-    onSortingChange,
+    onSortingChange: resolvedOnSortingChange,
     initialState: { pagination: { pageIndex: 0, pageSize: 10 } },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -159,7 +172,7 @@ export function TableCustom<TData>({
   return (
     <section className="overflow-hidden rounded-xl border border-brand-border bg-white shadow-[0_1px_2px_rgba(15,23,42,0.03)]">
       <div
-        className="scrollbar-hidden overflow-x-auto"
+        className="overflow-x-auto custom-scrollbar"
         tabIndex={0}
         aria-label="Scrollable data table"
       >
@@ -197,7 +210,13 @@ export function TableCustom<TData>({
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
                           {header.column.getCanSort() ? (
-                            <ChevronsUpDown className="h-3 w-3" />
+                            header.column.getIsSorted() === 'asc' ? (
+                              <ChevronUp className="h-3 w-3 text-primary" />
+                            ) : header.column.getIsSorted() === 'desc' ? (
+                              <ChevronDown className="h-3 w-3 text-primary" />
+                            ) : (
+                              <ChevronsUpDown className="h-3 w-3 opacity-40" />
+                            )
                           ) : null}
                         </button>
                       )}
@@ -361,7 +380,7 @@ function FilterControl<TData>({
         value={filterValue}
         onChange={(event) => header.column.setFilterValue(event.target.value)}
         placeholder={fallbackPlaceholder}
-        className="h-7 w-full min-w-28 rounded-md border border-slate-200 bg-white pl-6 pr-2 text-[11px] font-normal normal-case tracking-normal text-slate-700 outline-none focus:border-primary"
+        className="h-7 w-full min-w-24 rounded border border-transparent bg-slate-100/50 pl-6 pr-2 text-[11px] font-normal normal-case tracking-normal text-slate-700 outline-none transition-colors focus:border-slate-200 focus:bg-white focus:shadow-sm"
       />
     </label>
   );

@@ -78,6 +78,9 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
     <div className="w-full animate-slide-in">
       {/* Welcome Section */}
       <div className="mb-6 text-center">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[14px] overflow-hidden shadow-sm">
+          <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+        </div>
         <h1 className="text-[32px] font-black tracking-tight leading-none text-slate-900">
           {t.hi}
         </h1>

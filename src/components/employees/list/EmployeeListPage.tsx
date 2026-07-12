@@ -76,13 +76,6 @@ export default function EmployeeListPage() {
   return (
     <div className="space-y-4">
       <header className="space-y-3 border-b border-brand-border pb-3">
-        <div className="flex flex-col gap-1.5">
-          <h1 className="text-base font-semibold tracking-tight text-brand-primary-text">
-            {tr('pageTitle')}
-          </h1>
-          <p className="max-w-3xl text-xs text-brand-secondary-text">{tr('pageDescription')}</p>
-        </div>
-
         <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
           <SummaryCard label={tr('totalEmployees')} value={String(summary.total)} />
           <SummaryCard label={tr('currentPage')} value={String(summary.currentPage)} />

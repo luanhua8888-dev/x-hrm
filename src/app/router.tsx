@@ -2,9 +2,15 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import {
   AccessDeniedRouteElement,
+  AdministrationRouteElement,
   DashboardRouteElement,
   EmployeeListRouteElement,
-  LeaveListRouteElement,
+  LeaveMyLeaveRouteElement,
+  LeaveRequestsRouteElement,
+  LeaveCalendarRouteElement,
+  LeaveBalancesRouteElement,
+  LeaveTypesRouteElement,
+  LeaveEntitlementsRouteElement,
   LoginRouteElement,
   NotFoundRouteElement,
   OrganizationRouteElement,
@@ -12,6 +18,7 @@ import {
   UserCreateRouteElement,
   UserDetailRouteElement,
   UserListRouteElement,
+  AttendanceRouteElement,
 } from '@/app/route-elements';
 import { PERMISSIONS } from '@/config/permissions';
 import ModulePage from '@/components/common/ModulePage';
@@ -19,17 +26,6 @@ import AuthLayout from '@/layouts/AuthLayout';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import PermissionRoute from '@/routes/PermissionRoute';
 import ProtectedRoute from '@/routes/ProtectedRoute';
-
-const attendancePage = (
-  <ModulePage
-    capabilities={[
-      'Punch records',
-      'My attendance',
-      'Employee attendance',
-      'Attendance adjustments',
-    ]}
-  />
-);
 
 const timesheetPage = (
   <ModulePage capabilities={['My timesheet', 'Employee timesheets', 'Submission', 'Approval']} />
@@ -43,10 +39,6 @@ const recruitmentPage = (
 
 const performancePage = (
   <ModulePage capabilities={['KPI configuration', 'Goals', 'Reviews', 'Appraisals']} />
-);
-
-const administrationPage = (
-  <ModulePage capabilities={['Roles', 'Permissions', 'Audit logs', 'Settings']} />
 );
 
 export const router = createBrowserRouter([
@@ -122,21 +114,21 @@ export const router = createBrowserRouter([
           {
             element: <PermissionRoute permission={PERMISSIONS.LEAVE_VIEW} />,
             children: [
-              { path: '/leave', element: <LeaveListRouteElement /> },
-              { path: '/leave/my-leave', element: <LeaveListRouteElement /> },
-              { path: '/leave/requests', element: <LeaveListRouteElement /> },
-              { path: '/leave/calendar', element: <LeaveListRouteElement /> },
-              { path: '/leave/balances', element: <LeaveListRouteElement /> },
-              { path: '/leave/types', element: <LeaveListRouteElement /> },
-              { path: '/leave/entitlements', element: <LeaveListRouteElement /> },
+              { path: '/leave', element: <LeaveMyLeaveRouteElement /> },
+              { path: '/leave/my-leave', element: <LeaveMyLeaveRouteElement /> },
+              { path: '/leave/requests', element: <LeaveRequestsRouteElement /> },
+              { path: '/leave/calendar', element: <LeaveCalendarRouteElement /> },
+              { path: '/leave/balances', element: <LeaveBalancesRouteElement /> },
+              { path: '/leave/types', element: <LeaveTypesRouteElement /> },
+              { path: '/leave/entitlements', element: <LeaveEntitlementsRouteElement /> },
             ],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.ATTENDANCE_VIEW} />,
             children: [
-              { path: '/attendance', element: attendancePage },
-              { path: '/attendance/my-records', element: attendancePage },
-              { path: '/attendance/employee-records', element: attendancePage },
+              { path: '/attendance', element: <AttendanceRouteElement /> },
+              { path: '/attendance/my-records', element: <AttendanceRouteElement /> },
+              { path: '/attendance/employee-records', element: <AttendanceRouteElement /> },
             ],
           },
           {
@@ -177,11 +169,11 @@ export const router = createBrowserRouter([
           {
             element: <PermissionRoute permission={PERMISSIONS.SYSTEM_ADMIN} />,
             children: [
-              { path: '/administration', element: administrationPage },
-              { path: '/administration/roles', element: administrationPage },
-              { path: '/administration/permissions', element: administrationPage },
-              { path: '/administration/audit-logs', element: administrationPage },
-              { path: '/administration/settings', element: administrationPage },
+              { path: '/administration', element: <AdministrationRouteElement /> },
+              { path: '/administration/roles', element: <AdministrationRouteElement /> },
+              { path: '/administration/permissions', element: <AdministrationRouteElement /> },
+              { path: '/administration/audit-logs', element: <AdministrationRouteElement /> },
+              { path: '/administration/settings', element: <AdministrationRouteElement /> },
             ],
           },
           {

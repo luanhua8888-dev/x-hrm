@@ -8,6 +8,8 @@ import {
   FileSpreadsheet,
   Search,
   Users,
+  Download,
+  Filter,
 } from 'lucide-react';
 
 import { cn } from '@/utils/cn';
@@ -27,13 +29,11 @@ function toText(children: ReactNode) {
   if (typeof children === 'string' || typeof children === 'number') {
     return String(children);
   }
-
   if (Array.isArray(children)) {
     return children
       .map((child) => (typeof child === 'string' || typeof child === 'number' ? String(child) : ''))
       .join('');
   }
-
   return '';
 }
 
@@ -41,42 +41,42 @@ const reportCatalog = [
   {
     id: 'employee-directory',
     name: msg({ message: 'Danh sách nhân viên' }),
-    description: msg({ message: 'Hồ sơ nhân viên và thông tin phân bổ trong tổ chức.' }),
+    description: msg({ message: 'Hồ sơ nhân viên và phân bổ tổ chức.' }),
     domain: 'People',
     icon: Users,
   },
   {
     id: 'headcount',
     name: msg({ message: 'Nhân sự theo phòng ban' }),
-    description: msg({ message: 'Số nhân viên đang làm việc theo phòng ban và địa điểm.' }),
+    description: msg({ message: 'Số lượng nhân viên đang làm việc.' }),
     domain: 'People',
     icon: FileBarChart,
   },
   {
     id: 'leave-balance',
     name: msg({ message: 'Tổng hợp số dư phép' }),
-    description: msg({ message: 'Quyền lợi, số ngày đã dùng và số dư còn lại theo nhân viên.' }),
+    description: msg({ message: 'Số ngày phép đã dùng và còn lại.' }),
     domain: 'Leave',
     icon: CalendarDays,
   },
   {
     id: 'leave-history',
-    name: msg({ message: 'Lịch sử yêu cầu nghỉ phép' }),
-    description: msg({ message: 'Các yêu cầu đã gửi, được duyệt hoặc bị từ chối.' }),
+    name: msg({ message: 'Lịch sử yêu cầu phép' }),
+    description: msg({ message: 'Trạng thái các yêu cầu nghỉ phép.' }),
     domain: 'Leave',
     icon: CalendarDays,
   },
   {
     id: 'daily-attendance',
     name: msg({ message: 'Chấm công hằng ngày' }),
-    description: msg({ message: 'Giờ vào, giờ ra, đi trễ và trạng thái chấm công.' }),
+    description: msg({ message: 'Giờ vào/ra và đi trễ.' }),
     domain: 'Time',
     icon: Clock3,
   },
   {
     id: 'monthly-timesheet',
     name: msg({ message: 'Bảng công tháng' }),
-    description: msg({ message: 'Giờ làm việc, tăng ca và các mục bảng công đã duyệt.' }),
+    description: msg({ message: 'Tổng hợp giờ làm và tăng ca.' }),
     domain: 'Time',
     icon: FileSpreadsheet,
   },
@@ -111,32 +111,35 @@ export default function ReportsPage() {
     reportCatalog.find((report) => report.id === selectedId) ?? reportCatalog[0];
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-col gap-2 border-b border-brand-border pb-3 sm:flex-row sm:items-end sm:justify-between">
+    <div className="space-y-4 animate-in fade-in duration-500 pb-8">
+      <header className="flex flex-col gap-2 border-b border-slate-200 pb-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-lg font-semibold text-brand-primary-text">
-            <Trans>Báo cáo</Trans>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">
+            <Trans>Trung tâm Báo cáo</Trans>
           </h1>
-          <p className="mt-0.5 text-xs text-brand-secondary-text">
-            <Trans>Chạy báo cáo vận hành và xuất dữ liệu nhân sự.</Trans>
+          <p className="mt-0.5 text-xs font-medium text-slate-500">
+            <Trans>Trích xuất, phân tích và xuất dữ liệu nhân sự.</Trans>
           </p>
         </div>
-        <div className="flex items-center gap-2 text-[11px] text-brand-secondary-text">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-          <Trans>{reportCatalog.length} báo cáo tiêu chuẩn khả dụng</Trans>
+        <div className="flex items-center gap-1.5 rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-700">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-slate-400 opacity-75"></span>
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+          </span>
+          <Trans>{reportCatalog.length} báo cáo sẵn sàng</Trans>
         </div>
-      </div>
+      </header>
 
-      <div className="grid min-h-[calc(100vh-12rem)] overflow-hidden rounded-md border border-brand-border bg-white shadow-sm lg:grid-cols-[19rem_minmax(0,1fr)]">
-        <aside className="border-b border-brand-border bg-slate-50/70 lg:border-r lg:border-b-0">
-          <div className="space-y-2 border-b border-brand-border p-3">
+      <div className="grid min-h-[500px] overflow-hidden rounded-xl border border-slate-100 bg-white shadow-sm lg:grid-cols-[20rem_minmax(0,1fr)]">
+        <aside className="border-b border-slate-100 bg-slate-50/50 lg:border-r lg:border-b-0 flex flex-col">
+          <div className="space-y-3 border-b border-slate-100 p-3">
             <div className="relative">
               <Search className="absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
               <input
                 value={keyword}
                 onChange={(event) => setKeyword(event.target.value)}
-                placeholder={i18n._(msg({ message: 'Tìm báo cáo...' }))}
-                className="h-8 w-full rounded-md border border-brand-border bg-white pr-3 pl-8 text-xs outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
+                placeholder={i18n._(msg({ message: 'Tìm kiếm báo cáo...' }))}
+                className="h-8 w-full rounded-md border border-slate-200 bg-white pr-3 pl-8 text-xs font-medium outline-none transition-all placeholder:text-slate-400 focus:border-slate-400 focus:ring-1 focus:ring-slate-200"
               />
             </div>
             <div className="flex flex-wrap gap-1">
@@ -146,10 +149,10 @@ export default function ReportsPage() {
                   type="button"
                   onClick={() => setDomain(item)}
                   className={cn(
-                    'rounded-md px-2 py-1 text-[11px] font-medium transition-colors',
+                    'rounded-md px-2 py-1 text-[10px] font-bold transition-all',
                     domain === item
-                      ? 'bg-primary text-white'
-                      : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100',
+                      ? 'bg-slate-900 text-white'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50',
                   )}
                 >
                   {i18n._(domainMessages[item])}
@@ -158,7 +161,7 @@ export default function ReportsPage() {
             </div>
           </div>
 
-          <div className="max-h-[calc(100vh-18rem)] overflow-y-auto p-1.5">
+          <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
             {filteredReports.map((report) => {
               const Icon = report.icon;
               const isSelected = selectedReport.id === report.id;
@@ -168,125 +171,140 @@ export default function ReportsPage() {
                   type="button"
                   onClick={() => setSelectedId(report.id)}
                   className={cn(
-                    'flex w-full items-center gap-2.5 rounded-md border px-2.5 py-2 text-left transition-colors',
-                    isSelected
-                      ? 'border-primary/20 bg-primary-light text-primary'
-                      : 'border-transparent text-brand-primary-text hover:bg-white',
+                    'group flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left transition-all',
+                    isSelected ? 'bg-slate-900 shadow-sm' : 'hover:bg-slate-100',
                   )}
                 >
                   <span
                     className={cn(
-                      'flex h-7 w-7 shrink-0 items-center justify-center rounded-md',
-                      isSelected ? 'bg-white' : 'bg-slate-100',
+                      'flex h-7 w-7 shrink-0 items-center justify-center rounded transition-colors',
+                      isSelected
+                        ? 'bg-slate-800 text-white'
+                        : 'bg-white text-slate-500 border border-slate-200 group-hover:text-slate-900',
                     )}
                   >
                     <Icon className="h-3.5 w-3.5" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-xs font-semibold">
+                    <span
+                      className={cn(
+                        'block truncate text-xs font-bold',
+                        isSelected ? 'text-white' : 'text-slate-900',
+                      )}
+                    >
                       {i18n._(report.name)}
                     </span>
-                    <span className="mt-0.5 block text-[10px] text-brand-secondary-text">
-                      {i18n._(domainMessages[report.domain])}
+                    <span
+                      className={cn(
+                        'mt-0.5 block truncate text-[10px] font-medium',
+                        isSelected ? 'text-slate-400' : 'text-slate-500',
+                      )}
+                    >
+                      {i18n._(report.description)}
                     </span>
                   </span>
-                  <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-50" />
+                  <ChevronRight
+                    className={cn(
+                      'h-3.5 w-3.5 shrink-0 transition-transform',
+                      isSelected
+                        ? 'text-slate-400'
+                        : 'text-slate-300 group-hover:text-slate-500 group-hover:translate-x-0.5',
+                    )}
+                  />
                 </button>
               );
             })}
             {filteredReports.length === 0 ? (
-              <p className="p-6 text-center text-xs text-brand-secondary-text">
-                <Trans>Không tìm thấy báo cáo phù hợp.</Trans>
-              </p>
+              <div className="flex flex-col items-center justify-center py-10 text-center">
+                <Search className="mb-2 h-5 w-5 text-slate-300" />
+                <p className="text-[11px] font-bold text-slate-500">
+                  <Trans>Không tìm thấy báo cáo.</Trans>
+                </p>
+              </div>
             ) : null}
           </div>
         </aside>
 
-        <section className="min-w-0">
-          <div className="border-b border-brand-border px-4 py-3">
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-                <selectedReport.icon className="h-4 w-4" />
+        <section className="flex flex-col min-w-0 bg-white">
+          <div className="border-b border-slate-100 px-5 py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-900 text-white shadow-sm">
+                <selectedReport.icon className="h-5 w-5" />
               </div>
               <div>
-                <h2 className="text-sm font-semibold text-brand-primary-text">
-                  {i18n._(selectedReport.name)}
-                </h2>
-                <p className="mt-1 text-xs text-brand-secondary-text">
+                <h2 className="text-sm font-bold text-slate-900">{i18n._(selectedReport.name)}</h2>
+                <p className="text-xs font-medium text-slate-500 mt-0.5">
                   {i18n._(selectedReport.description)}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="p-4">
-            <div className="max-w-3xl rounded-md border border-brand-border">
-              <div className="border-b border-brand-border bg-slate-50 px-3 py-2">
-                <h3 className="text-xs font-semibold text-brand-primary-text">
+          <div className="flex-1 p-5">
+            <div className="mx-auto w-full flex flex-col gap-4">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+                <Filter className="h-3.5 w-3.5 text-slate-400" />
+                <h3 className="text-xs font-bold text-slate-900">
                   <Trans>Tham số báo cáo</Trans>
                 </h3>
               </div>
-              <div className="grid gap-3 p-3 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <label className="space-y-1">
-                  <span className="text-[11px] font-medium text-brand-secondary-text">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     <Trans>Từ ngày</Trans>
                   </span>
                   <input
                     type="date"
-                    className="h-8 w-full rounded-sm border border-brand-border px-2 text-xs outline-none focus:border-primary"
+                    className="h-8 w-full rounded-md border border-slate-200 px-2.5 text-xs font-semibold text-slate-900 outline-none transition-all focus:border-slate-400 focus:ring-1 focus:ring-slate-200"
                   />
                 </label>
                 <label className="space-y-1">
-                  <span className="text-[11px] font-medium text-brand-secondary-text">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     <Trans>Đến ngày</Trans>
                   </span>
                   <input
                     type="date"
-                    className="h-8 w-full rounded-sm border border-brand-border px-2 text-xs outline-none focus:border-primary"
+                    className="h-8 w-full rounded-md border border-slate-200 px-2.5 text-xs font-semibold text-slate-900 outline-none transition-all focus:border-slate-400 focus:ring-1 focus:ring-slate-200"
                   />
                 </label>
                 <label className="space-y-1">
-                  <span className="text-[11px] font-medium text-brand-secondary-text">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     <Trans>Phòng ban</Trans>
                   </span>
-                  <select className="h-8 w-full rounded-sm border border-brand-border bg-white px-2 text-xs outline-none focus:border-primary">
-                    <option>{i18n._(msg({ message: 'Tất cả phòng ban' }))}</option>
-                  </select>
-                </label>
-                <label className="space-y-1">
-                  <span className="text-[11px] font-medium text-brand-secondary-text">
-                    <Trans>Định dạng đầu ra</Trans>
-                  </span>
-                  <select className="h-8 w-full rounded-sm border border-brand-border bg-white px-2 text-xs outline-none focus:border-primary">
-                    <option>{i18n._(msg({ message: 'Xem trước' }))}</option>
-                    <option>{i18n._(msg({ message: 'Tệp Excel' }))}</option>
-                    <option>{i18n._(msg({ message: 'Tài liệu PDF' }))}</option>
+                  <select className="h-8 w-full rounded-md border border-slate-200 bg-white px-2.5 text-xs font-semibold text-slate-900 outline-none transition-all focus:border-slate-400 focus:ring-1 focus:ring-slate-200">
+                    <option>{i18n._(msg({ message: 'Tất cả' }))}</option>
                   </select>
                 </label>
               </div>
-              <div className="flex items-center justify-end gap-2 border-t border-brand-border bg-slate-50 px-3 py-2">
+
+              <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/50 px-4 py-3 -mx-5 mt-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-slate-700">Định dạng:</span>
+                  <select className="h-7 rounded border border-slate-200 bg-white px-1.5 text-[11px] font-semibold text-slate-700 outline-none">
+                    <option>Excel (.xlsx)</option>
+                    <option>PDF (.pdf)</option>
+                    <option>CSV (.csv)</option>
+                  </select>
+                </div>
                 <button
                   type="button"
-                  className="h-8 rounded-sm border border-brand-border bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                  className="flex h-8 items-center justify-center gap-1.5 rounded-md bg-slate-900 px-4 text-[11px] font-bold text-white shadow-sm transition-all hover:bg-slate-800"
                 >
-                  <Trans>Đặt lại</Trans>
-                </button>
-                <button
-                  type="button"
-                  className="h-8 rounded-sm bg-primary px-4 text-xs font-semibold text-white hover:bg-primary-hover"
-                >
-                  <Trans>Chạy báo cáo</Trans>
+                  <Download className="h-3.5 w-3.5" />
+                  <Trans>Xuất Báo cáo</Trans>
                 </button>
               </div>
             </div>
 
-            <div className="mt-4 rounded-md border border-dashed border-brand-border bg-slate-50/60 px-4 py-10 text-center">
-              <FileBarChart className="mx-auto h-7 w-7 text-slate-300" />
-              <p className="mt-2 text-xs font-medium text-slate-600">
-                <Trans>Xem trước báo cáo</Trans>
+            <div className="mt-5 flex h-32 flex-col items-center justify-center rounded-lg border border-dashed border-slate-200 bg-slate-50 text-center">
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white border border-slate-100 shadow-sm">
+                <FileSpreadsheet className="h-4 w-4 text-slate-400" />
+              </div>
+              <p className="mt-2 text-[11px] font-bold text-slate-900">
+                <Trans>Chưa có dữ liệu xem trước</Trans>
               </p>
-              <p className="mt-1 text-[11px] text-slate-400">
-                <Trans>Chọn tham số và chạy báo cáo để xem kết quả.</Trans>
+              <p className="mt-0.5 text-[10px] font-medium text-slate-500">
+                <Trans>Chọn tham số và Xuất báo cáo để tải về.</Trans>
               </p>
             </div>
           </div>

@@ -361,7 +361,17 @@ function NotificationsPopover({ isOpen, onClose }: { isOpen: boolean; onClose: (
   );
 }
 
-function HelpPopover({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function HelpPopover({
+  isOpen,
+  onClose,
+  onOpenGuide,
+  onOpenShortcuts,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpenGuide: () => void;
+  onOpenShortcuts: () => void;
+}) {
   if (!isOpen) return null;
   return (
     <>
@@ -372,14 +382,22 @@ function HelpPopover({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
         </div>
         <button
           type="button"
-          className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary"
+          onClick={() => {
+            onClose();
+            onOpenGuide();
+          }}
+          className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
         >
           <CircleHelp className="h-4 w-4 text-slate-400" />
           <Trans>Hướng dẫn sử dụng</Trans>
         </button>
         <button
           type="button"
-          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-primary"
+          onClick={() => {
+            onClose();
+            onOpenShortcuts();
+          }}
+          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
         >
           <Menu className="h-4 w-4 text-slate-400" />
           <Trans>Phím tắt hệ thống</Trans>
@@ -390,6 +408,116 @@ function HelpPopover({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
         </div>
       </div>
     </>
+  );
+}
+
+function GuideModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm animate-in fade-in">
+      <div className="relative flex w-full max-w-2xl flex-col rounded-2xl bg-white shadow-2xl animate-in zoom-in-95">
+        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+          <h2 className="text-lg font-bold text-slate-900">
+            <Trans>Hướng dẫn sử dụng HUI HRM</Trans>
+          </h2>
+          <button
+            onClick={onClose}
+            className="rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div className="p-6">
+          <div className="rounded-xl bg-slate-50 p-6 text-center">
+            <CircleHelp className="mx-auto mb-3 h-10 w-10 text-slate-300" />
+            <h3 className="mb-2 text-base font-bold text-slate-900">Tài liệu đang được cập nhật</h3>
+            <p className="text-sm text-slate-500">
+              Cảm ơn bạn đã sử dụng HUI HRM. Tài liệu hướng dẫn sử dụng chi tiết cho từng phân hệ
+              hiện đang trong quá trình hoàn thiện và sẽ sớm được ra mắt trong bản cập nhật tới.
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-6 rounded-lg bg-slate-900 px-6 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+            >
+              Đóng lại
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShortcutsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm animate-in fade-in">
+      <div className="relative w-full max-w-lg rounded-2xl bg-white shadow-2xl animate-in zoom-in-95">
+        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+          <h2 className="text-lg font-bold text-slate-900">
+            <Trans>Phím tắt hệ thống</Trans>
+          </h2>
+          <button
+            onClick={onClose}
+            className="rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div className="p-2">
+          <table className="w-full text-left text-sm">
+            <tbody>
+              {[
+                { desc: 'Mở thanh tìm kiếm (Command Palette)', keys: ['Ctrl', 'K'] },
+                { desc: 'Đóng cửa sổ hiện tại', keys: ['Esc'] },
+                { desc: 'Trở về trang chủ', keys: ['G', 'H'] },
+                { desc: 'Mở trung tâm báo cáo', keys: ['G', 'R'] },
+              ].map((shortcut, i) => (
+                <tr key={i} className="border-b border-slate-50 last:border-0">
+                  <td className="px-4 py-3 font-medium text-slate-600">{shortcut.desc}</td>
+                  <td className="px-4 py-3 text-right">
+                    <div className="flex justify-end gap-1">
+                      {shortcut.keys.map((k) => (
+                        <kbd
+                          key={k}
+                          className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-semibold text-slate-500 shadow-sm"
+                        >
+                          {k}
+                        </kbd>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -431,6 +559,8 @@ export default function DashboardLayout() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
 
   const allLinks = useMemo(() => {
     const flat: { title: string; path: string; icon?: React.ElementType }[] = [];
@@ -496,12 +626,14 @@ export default function DashboardLayout() {
   );
 
   return (
-    <div className="flex min-h-screen flex-col bg-brand-bg">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-brand-bg">
       <CommandPalette
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         links={allLinks}
       />
+      <GuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
+      <ShortcutsModal isOpen={isShortcutsOpen} onClose={() => setIsShortcutsOpen(false)} />
 
       <header className="fixed inset-x-0 top-0 z-40 border-b border-slate-200/80 bg-white/80 shadow-sm backdrop-blur-md">
         <div className="flex h-12 items-center px-2 lg:px-0">
@@ -515,40 +647,50 @@ export default function DashboardLayout() {
             >
               <Menu className="h-4 w-4" />
             </Button>
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-blue-600 text-[13px] font-bold text-white shadow-sm ring-1 ring-primary/20">
-                H
+            <div className="flex items-center gap-3">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-[10px] bg-slate-900 text-white shadow-md ring-1 ring-slate-900/10">
+                <div className="absolute inset-0 rounded-[10px] bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
+                <span className="relative text-[15px] font-bold tracking-tighter">H</span>
               </div>
-              <div className="hidden flex-col sm:flex">
-                <div className="text-sm font-semibold leading-tight tracking-tight text-slate-800">
+              <div className="hidden flex-col justify-center sm:flex">
+                <div className="text-[14px] font-bold leading-none tracking-tight text-slate-900">
                   HUI HRM
                 </div>
-                <div className="text-xs font-medium leading-tight text-slate-500">
+                <div className="mt-1 text-[10px] font-semibold leading-none tracking-[0.06em] text-slate-400 uppercase">
                   <Trans>Quản trị nhân sự</Trans>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="hidden h-full items-center gap-1.5 px-2 md:flex">
-            <button
-              type="button"
-              className="flex h-8 items-center rounded-full bg-slate-100/80 px-3.5 text-[13px] font-semibold text-primary shadow-sm ring-1 ring-slate-200/50 transition-all hover:bg-slate-200/50"
-            >
-              <Trans>Không gian làm việc</Trans>
-            </button>
+          <div className="hidden h-[34px] items-center rounded-lg bg-slate-100/80 p-[3px] md:flex ml-6 border border-slate-200/50 shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
             {[
-              { key: 'reports', label: <Trans>Báo cáo</Trans> },
-              { key: 'tools', label: <Trans>Công cụ</Trans> },
-            ].map((item) => (
-              <button
-                key={item.key}
-                type="button"
-                className="flex h-8 items-center rounded-full px-3.5 text-[13px] font-medium text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
-              >
-                {item.label}
-              </button>
-            ))}
+              { key: 'workspace', label: <Trans>Không gian làm việc</Trans>, path: '/dashboard' },
+              { key: 'reports', label: <Trans>Báo cáo</Trans>, path: '/reports' },
+              { key: 'tools', label: <Trans>Công cụ</Trans>, path: '/administration' },
+            ].map((item) => {
+              const isActive =
+                location.pathname.startsWith(item.path) ||
+                (item.key === 'workspace' &&
+                  !location.pathname.startsWith('/reports') &&
+                  !location.pathname.startsWith('/administration'));
+
+              return (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => void navigate(item.path)}
+                  className={cn(
+                    'flex h-full items-center rounded-md px-4 text-[13px] transition-all',
+                    isActive
+                      ? 'bg-white font-semibold text-slate-900 shadow-sm ring-1 ring-slate-200/60'
+                      : 'font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-200/50',
+                  )}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
 
           <div className="ml-auto flex items-center gap-1.5 pr-2 lg:pr-4">
@@ -591,7 +733,12 @@ export default function DashboardLayout() {
               >
                 <CircleHelp className="h-4 w-4" />
               </Button>
-              <HelpPopover isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+              <HelpPopover
+                isOpen={isHelpOpen}
+                onClose={() => setIsHelpOpen(false)}
+                onOpenGuide={() => setIsGuideOpen(true)}
+                onOpenShortcuts={() => setIsShortcutsOpen(true)}
+              />
             </div>
             <div className="mx-1 hidden h-4 w-px bg-slate-200 sm:block" />
             <LanguageSwitcher />
@@ -621,7 +768,7 @@ export default function DashboardLayout() {
         </div>
       </header>
 
-      <div className="flex flex-1 pt-12 pb-6">
+      <div className="flex flex-1 pt-12 pb-6 w-full min-w-0">
         <div className="fixed inset-y-0 left-0 top-12 hidden lg:block">{sidebar}</div>
 
         {isMobileOpen ? (
@@ -656,12 +803,12 @@ export default function DashboardLayout() {
 
         <div
           className={cn(
-            'min-w-0 flex-1 transition-[margin]',
+            'min-w-0 flex-1 overflow-x-hidden transition-[margin]',
             isCollapsed ? 'lg:ml-14' : 'lg:ml-60',
           )}
         >
           <BreadcrumbBar />
-          <main className="w-full p-3 lg:p-4">
+          <main className="w-full overflow-x-hidden p-3 lg:p-4">
             <Outlet />
           </main>
         </div>

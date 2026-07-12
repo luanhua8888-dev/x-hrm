@@ -41,13 +41,6 @@ export default function UserCreatePage() {
 
   return (
     <div className="max-w-2xl space-y-4">
-      <div>
-        <h1 className="text-2xl font-semibold text-slate-900">New user</h1>
-        <p className="text-sm text-slate-500">
-          Create a login account. Link it to an employee only when access is required.
-        </p>
-      </div>
-
       {createUser.error ? (
         <ErrorState title="Unable to create user" error={createUser.error} />
       ) : null}

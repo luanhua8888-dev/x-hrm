@@ -56,15 +56,7 @@ export default function UserListPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between border-b border-brand-border pb-2">
-        <div>
-          <h1 className="text-base font-semibold text-brand-primary-text">
-            <Trans>Dữ liệu người dùng</Trans>
-          </h1>
-          <p className="text-xs text-brand-secondary-text">
-            <Trans>Quản lý tài khoản và quyền truy cập hệ thống.</Trans>
-          </p>
-        </div>
+      <div className="flex items-center justify-end border-b border-brand-border pb-2">
         <Link
           to="/users/new"
           className="inline-flex h-8 items-center justify-center gap-2 rounded-sm bg-primary px-3 text-xs font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"

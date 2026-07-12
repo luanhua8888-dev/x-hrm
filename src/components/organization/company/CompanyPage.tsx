@@ -4,7 +4,6 @@ import {
   Building2,
   ChevronRight,
   Edit3,
-  Landmark,
   MapPin,
   Network,
   Plus,
@@ -14,7 +13,6 @@ import {
 } from 'lucide-react';
 import { type FormEvent, type ReactNode, useCallback, useMemo, useState } from 'react';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -133,15 +131,7 @@ export default function CompanyPage() {
 
   return (
     <div className="space-y-3">
-      <header className="flex min-h-9 flex-col gap-2 border-b border-brand-border pb-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex min-w-0 items-baseline gap-3">
-          <h1 className="shrink-0 text-base font-semibold tracking-tight text-slate-900">
-            {tr('pageTitle')}
-          </h1>
-          <p className="hidden truncate text-[11px] text-slate-500 md:block">
-            {tr('pageDescription')}
-          </p>
-        </div>
+      <header className="flex min-h-9 flex-col gap-2 border-b border-brand-border pb-2 sm:flex-row sm:items-center sm:justify-end">
         <Button
           size="sm"
           className="h-9 rounded-lg bg-primary text-xs hover:bg-primary-hover"
@@ -156,9 +146,6 @@ export default function CompanyPage() {
         <aside className="border-b border-brand-border bg-slate-50/60 xl:border-b-0 xl:border-r">
           <div className="border-b border-brand-border p-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white">
-                <Landmark className="h-5 w-5" />
-              </div>
               <div>
                 <p className="text-sm font-semibold text-slate-900">{tr('groupName')}</p>
                 <p className="mt-0.5 text-[11px] text-slate-500">{tr('parentGroup')}</p>
@@ -186,24 +173,26 @@ export default function CompanyPage() {
                     role="option"
                     aria-selected={active}
                     onClick={() => setSelectedId(company.id)}
-                    className={`group flex min-h-14 w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors ${active ? 'bg-primary text-white shadow-sm' : 'text-slate-700 hover:bg-white'}`}
+                    className={`group flex min-h-14 w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors border border-transparent ${active ? 'bg-slate-50 border-slate-200/60 shadow-sm' : 'text-slate-700 hover:bg-white'}`}
                   >
                     <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[10px] font-bold ${active ? 'bg-white/15 text-white' : 'border border-slate-200 bg-white text-slate-600'}`}
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[10px] font-bold ${active ? 'bg-white text-primary border border-slate-200 shadow-sm' : 'border border-slate-200 bg-white text-slate-600'}`}
                     >
                       {company.code}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-xs font-semibold">{company.name}</span>
                       <span
-                        className={`mt-1 block text-[10px] ${active ? 'text-blue-100' : 'text-slate-400'}`}
+                        className={`block truncate text-xs font-semibold ${active ? 'text-primary' : ''}`}
                       >
+                        {company.name}
+                      </span>
+                      <span className={`mt-1 block text-[10px] text-slate-500`}>
                         {company.departments} {tr('departmentsLower')} · {company.employees}{' '}
                         {tr('peopleLower')}
                       </span>
                     </span>
                     <ChevronRight
-                      className={`h-4 w-4 shrink-0 ${active ? 'text-white' : 'text-slate-300 group-hover:text-slate-500'}`}
+                      className={`h-4 w-4 shrink-0 ${active ? 'text-primary' : 'text-slate-300 group-hover:text-slate-500'}`}
                     />
                   </button>
                 );
@@ -217,7 +206,7 @@ export default function CompanyPage() {
             <div className="border-b border-brand-border p-4">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="grid min-w-0 grid-cols-[40px_minmax(0,1fr)] items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary/15 bg-primary/10 text-[11px] font-bold text-primary">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-[11px] font-bold text-slate-700 shadow-sm">
                     {selected.code}
                   </div>
                   <div className="min-w-0">
@@ -695,13 +684,13 @@ function Select({
 }
 function Status({ active, label }: { active: boolean; label: string }) {
   return (
-    <Badge className="h-6 w-fit min-w-[72px] shrink-0 gap-1.5 rounded-md border-slate-200 bg-slate-50 px-2 text-[10px] font-medium text-slate-600 shadow-none">
+    <div className="flex h-6 w-fit items-center gap-1.5 px-1 text-[11px] font-medium text-slate-600">
       <span
         className={`h-1.5 w-1.5 rounded-full ${active ? 'bg-emerald-500' : 'bg-slate-400'}`}
         aria-hidden="true"
       />
       {label}
-    </Badge>
+    </div>
   );
 }
 function Summary({ label, value }: { label: string; value: string }) {

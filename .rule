@@ -16,11 +16,16 @@
    - Wide tables must support horizontal scrolling with the scrollbar visually hidden. Identification columns should be pinned left and action columns pinned right.
    - `FilterCustom` must remain compact. Advanced filters are collapsed by default and expand only when requested.
 
-5. **Internationalization:**
+5. **Design Aesthetics & Active States:**
+   - Avoid heavy, solid, dark background colors for active states, selected items, or standard buttons (e.g. avoid full `bg-slate-900` or `bg-primary` blocks for list items). 
+   - Prefer subtle background tints (e.g. `bg-primary/10`, `bg-slate-50`), ghost styles, or left-border highlights with colored text/icons for active selections.
+   - Keep padding compact, borders minimal, and avoid unnecessary nested background colors to ensure a clean, uncluttered, "flat" enterprise interface.
+
+6. **Internationalization:**
    - Every user-visible string on new or changed pages and shared components must support both Vietnamese and English.
    - Labels, placeholders, empty states, accessibility labels, table headers, filters, buttons and statuses must all react to the active locale.
 
-6. **File Naming:**
+7. **File Naming:**
    - React component files must use PascalCase matching the exported component, for example `PopupCustom.tsx`, `TableCustom.tsx`, and `OrganizationPage.tsx`.
    - Non-component utility and configuration files may use a single lowercase name, for example `colors.ts` or `env.ts`.
    - Do not use kebab-case or snake_case for files. Names such as `popup-custom.tsx`, `table_custom.tsx`, and `the-infinite-grid.tsx` are prohibited.

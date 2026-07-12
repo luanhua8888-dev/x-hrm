@@ -23,10 +23,6 @@ export default function UserDetailPage() {
 
   return (
     <div className="max-w-3xl space-y-4">
-      <div>
-        <h1 className="text-2xl font-semibold text-slate-900">{userQuery.data.fullName}</h1>
-        <p className="text-sm text-slate-500">{userQuery.data.email}</p>
-      </div>
       <div className="rounded-md border border-slate-200 bg-white p-4">
         <dl className="grid gap-4 sm:grid-cols-2">
           <div>

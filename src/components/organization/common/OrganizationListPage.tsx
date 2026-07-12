@@ -117,13 +117,7 @@ export function OrganizationListPage({
 
   return (
     <div className="space-y-3">
-      <header className="flex min-h-9 items-center justify-between border-b border-brand-border pb-2">
-        <div className="flex min-w-0 items-baseline gap-3">
-          <h1 className="shrink-0 text-base font-semibold text-slate-900">{tr(config.title)}</h1>
-          <p className="hidden truncate text-[11px] text-slate-500 md:block">
-            {tr(config.description)}
-          </p>
-        </div>
+      <header className="flex min-h-9 items-center justify-end border-b border-brand-border pb-2">
         <Button size="sm" className="h-8 rounded-lg bg-primary text-xs hover:bg-primary-hover">
           <Plus className="h-4 w-4" />
           {tr(config.addLabel)}
