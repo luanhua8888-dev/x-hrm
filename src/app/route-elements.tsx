@@ -13,9 +13,6 @@ const UserCreatePage = lazy(() => import('@/components/users/create/UserCreatePa
 const UserDetailPage = lazy(() => import('@/components/users/detail/UserDetailPage'));
 const UserListPage = lazy(() => import('@/components/users/list/UserListPage'));
 const AdministrationPage = lazy(() => import('@/components/administration/AdministrationPage'));
-const AttendanceRouteElementComponent = lazy(
-  () => import('@/components/attendance/list/AttendanceListPage'),
-);
 
 function withPageLoading(element: ReactNode) {
   return <Suspense fallback={<PageLoading />}>{element}</Suspense>;
@@ -27,10 +24,6 @@ export function AccessDeniedRouteElement() {
 
 export function AdministrationRouteElement() {
   return withPageLoading(<AdministrationPage />);
-}
-
-export function AttendanceRouteElement() {
-  return withPageLoading(<AttendanceRouteElementComponent />);
 }
 
 export function DashboardRouteElement() {

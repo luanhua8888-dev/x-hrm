@@ -36,15 +36,11 @@ export default function AttendanceDashboardPage() {
       </div>
 
       <div className="flex items-center gap-4">
-        <Button
-          size="lg"
-          className="h-14 px-8 bg-emerald-600 hover:bg-emerald-700 text-sm font-bold shadow-sm"
-        >
+        <Button className="h-14 px-8 bg-emerald-600 hover:bg-emerald-700 text-sm font-bold shadow-sm">
           <Clock className="mr-2 h-5 w-5" />
           {i18n.locale === 'en' ? 'Check In' : 'Vào ca'}
         </Button>
         <Button
-          size="lg"
           variant="secondary"
           className="h-14 px-8 text-sm font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 hover:text-rose-800 shadow-sm border border-rose-100"
         >

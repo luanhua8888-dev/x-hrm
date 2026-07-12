@@ -18,7 +18,9 @@ import {
   UserCreateRouteElement,
   UserDetailRouteElement,
   UserListRouteElement,
-  AttendanceRouteElement,
+  AttendanceDashboardRouteElement,
+  MyRecordsRouteElement,
+  EmployeeRecordsRouteElement,
 } from '@/app/route-elements';
 import { PERMISSIONS } from '@/config/permissions';
 import ModulePage from '@/components/common/ModulePage';
@@ -126,9 +128,9 @@ export const router = createBrowserRouter([
           {
             element: <PermissionRoute permission={PERMISSIONS.ATTENDANCE_VIEW} />,
             children: [
-              { path: '/attendance', element: <AttendanceRouteElement /> },
-              { path: '/attendance/my-records', element: <AttendanceRouteElement /> },
-              { path: '/attendance/employee-records', element: <AttendanceRouteElement /> },
+              { path: '/attendance', element: <AttendanceDashboardRouteElement /> },
+              { path: '/attendance/my-records', element: <MyRecordsRouteElement /> },
+              { path: '/attendance/employee-records', element: <EmployeeRecordsRouteElement /> },
             ],
           },
           {
