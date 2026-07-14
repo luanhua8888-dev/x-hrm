@@ -4,7 +4,7 @@ import { Component as InfiniteGridBackground } from '@/components/ui/TheInfinite
 export default function AuthLayout() {
   return (
     <InfiniteGridBackground>
-      <div className="relative z-10 w-full max-w-5xl">
+      <div className="w-full">
         {/* Login Area */}
         <div className="w-full">
           <Outlet />

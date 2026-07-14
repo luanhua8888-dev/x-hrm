@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { KeyRound, User, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, Eye, EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { HeartWaveLoader } from '@/components/feedback/HeartWaveLoader';
 import { useLogin } from '@/queries/auth.query';
 import { LoginFormValues, loginSchema } from '@/components/login/login.schema';
+import logoBlue from '@/assets/logo2.jpg';
 
 interface LoginFormProps {
   currentLang: 'EN' | 'VI';
@@ -36,169 +38,182 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
 
   const t = {
     EN: {
-      hi: 'Hi Operator',
-      welcome: 'Welcome to HRM',
+      hi: 'Sign in to your account',
+      welcome: 'Enter your credentials to access the system.',
       username: 'Username',
       password: 'Password',
       forgot: 'Forgot password?',
-      login: 'Login',
-      authenticating: 'Authenticating…',
+      login: 'Sign in',
+      authenticating: 'Signing in...',
       failed: 'Authentication Failed',
-      failedDesc:
-        'Please verify your username and password. If the problem persists, contact your system administrator.',
-      placeholderUser: 'Enter your username…',
-      username_required: 'Username is required.',
-      password_required: 'Password is required.',
-      password_no_spaces: 'Password cannot contain spaces.',
+      failedDesc: 'Invalid credentials. Please contact IT support if you need help.',
+      placeholderUser: 'e.g. jdoe',
+      logoAlt: 'Hospital Logo',
+      noAccount: "Don't have an account?",
+      register: 'Register',
     },
     VI: {
-      hi: 'Xin chào',
-      welcome: 'Chào mừng bạn đến với HRM',
+      hi: 'Đăng nhập vào hệ thống',
+      welcome: 'Vui lòng nhập thông tin để tiếp tục.',
       username: 'Tên đăng nhập',
       password: 'Mật khẩu',
       forgot: 'Quên mật khẩu?',
       login: 'Đăng nhập',
-      authenticating: 'Đang xác thực…',
+      authenticating: 'Đang xác thực...',
       failed: 'Đăng nhập thất bại',
-      failedDesc:
-        'Vui lòng kiểm tra lại tài khoản và mật khẩu. Nếu vấn đề tiếp tục xảy ra, vui lòng liên hệ quản trị viên.',
-      placeholderUser: 'Nhập tên đăng nhập…',
-      username_required: 'Tên đăng nhập là bắt buộc.',
-      password_required: 'Mật khẩu là bắt buộc.',
-      password_no_spaces: 'Mật khẩu không được chứa khoảng trắng.',
+      failedDesc: 'Sai thông tin đăng nhập. Vui lòng liên hệ bộ phận IT nếu cần hỗ trợ.',
+      placeholderUser: 'VD: nvan',
+      logoAlt: 'Logo Bệnh viện',
+      noAccount: 'Chưa có tài khoản?',
+      register: 'Đăng ký ngay',
     },
   }[currentLang];
 
   const getErrorMessage = (msgKey: string | undefined) => {
     if (!msgKey) return '';
-    return t[msgKey as keyof typeof t] || msgKey;
+    const validationMessages: Record<'EN' | 'VI', Record<string, string>> = {
+      EN: {
+        username_required: 'Username is required.',
+        password_required: 'Password is required.',
+        password_no_spaces: 'Password cannot contain spaces.',
+      },
+      VI: {
+        username_required: 'Tên đăng nhập là bắt buộc.',
+        password_required: 'Mật khẩu là bắt buộc.',
+        password_no_spaces: 'Mật khẩu không được chứa khoảng trắng.',
+      },
+    };
+    return validationMessages[currentLang][msgKey] ?? msgKey;
   };
 
   return (
-    <div className="w-full animate-slide-in">
-      {/* Welcome Section */}
-      <div className="mb-6 text-center">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[14px] overflow-hidden shadow-sm">
-          <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+    <div className="w-full">
+      <div className="mb-10 text-center">
+        <div className="mb-8 flex justify-center">
+          <div className="inline-flex rounded-2xl bg-white p-3 shadow-md">
+            <img
+              src={logoBlue}
+              alt={t.logoAlt}
+              className="h-10 w-auto object-contain mix-blend-multiply"
+            />
+          </div>
         </div>
-        <h1 className="text-[32px] font-black tracking-tight leading-none text-slate-900">
-          {t.hi}
-        </h1>
-        <p className="mt-2.5 text-sm text-slate-500 font-medium">{t.welcome}</p>
+        <h1 className="text-3xl font-bold tracking-tight text-white drop-shadow-md">{t.hi}</h1>
+        <p className="mt-2.5 text-[15px] font-medium text-slate-300 drop-shadow-sm">{t.welcome}</p>
       </div>
 
-      {/* Error State Banner */}
-      {login.error ? (
+      {login.error && (
         <div
-          className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 animate-in fade-in duration-300"
+          className="mb-6 flex gap-3 rounded-xl border border-red-500/50 bg-red-900/60 p-4 text-sm text-white shadow-sm animate-in fade-in duration-300"
           aria-live="polite"
         >
-          <div className="flex gap-3">
-            <AlertCircle className="h-5 w-5 shrink-0 text-red-600 mt-0.5" aria-hidden="true" />
-            <div className="space-y-1">
-              <h5 className="font-semibold leading-none">{t.failed}</h5>
-              <p className="text-xs text-red-600/90 mt-1 leading-relaxed">{t.failedDesc}</p>
-            </div>
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" aria-hidden="true" />
+          <div>
+            <h5 className="font-bold leading-none drop-shadow-sm">{t.failed}</h5>
+            <p className="mt-1.5 text-xs font-medium leading-relaxed text-red-200 drop-shadow-sm">
+              {t.failedDesc}
+            </p>
           </div>
         </div>
-      ) : null}
+      )}
 
-      {/* Input Form */}
       <form
-        className="space-y-4"
-        onSubmit={(event) => {
-          void onSubmit(event);
+        onSubmit={(e) => {
+          void onSubmit(e);
         }}
+        className="space-y-5"
       >
-        <div className="space-y-2">
-          <Label
-            htmlFor="username"
-            className="text-[11px] font-bold uppercase tracking-wider text-brand-secondary-text/80"
-          >
+        <div className="space-y-2 text-left">
+          <Label htmlFor="username" className="text-sm font-bold text-slate-200 drop-shadow-sm">
             {t.username}
           </Label>
-          <div className="relative">
-            <User
-              className="absolute top-4 left-3.5 h-4 w-4 text-brand-secondary-text/50 pointer-events-none"
-              aria-hidden="true"
-            />
-            <Input
-              id="username"
-              autoComplete="username"
-              placeholder={t.placeholderUser}
-              spellCheck={false}
-              className="pl-10 h-12 bg-slate-50 border border-slate-200/80 text-brand-primary-text placeholder:text-brand-secondary-text/40 rounded-xl hover:bg-slate-100/40 hover:border-slate-300 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200"
-              {...form.register('username')}
-            />
-          </div>
-          {form.formState.errors.username ? (
-            <p
-              className="text-xs text-red-600 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-200"
-              aria-live="polite"
-            >
+          <Input
+            id="username"
+            autoComplete="username"
+            tabIndex={1}
+            className="h-12 rounded-xl border-slate-600 bg-slate-800/80 px-4 text-[15px] text-white shadow-inner transition-colors hover:bg-slate-800 focus:border-slate-400 focus:bg-slate-800 focus:ring-1 focus:ring-slate-400 focus:outline-none"
+            {...form.register('username')}
+            aria-invalid={!!form.formState.errors.username}
+          />
+          {form.formState.errors.username && (
+            <p className="mt-1.5 flex items-center gap-1 text-xs font-bold text-red-400 drop-shadow-sm animate-in fade-in">
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {getErrorMessage(form.formState.errors.username.message)}
             </p>
-          ) : null}
+          )}
         </div>
 
-        <div className="space-y-2">
-          <Label
-            htmlFor="password"
-            className="text-[11px] font-bold uppercase tracking-wider text-brand-secondary-text/80"
-          >
-            {t.password}
-          </Label>
-          <div className="relative">
-            <KeyRound
-              className="absolute top-4 left-3.5 h-4 w-4 text-brand-secondary-text/50 pointer-events-none"
-              aria-hidden="true"
-            />
-            <Input
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-              autoComplete="current-password"
-              placeholder="••••••••"
-              className="pl-10 pr-10 h-12 bg-slate-50 border border-slate-200/80 text-brand-primary-text placeholder:text-brand-secondary-text/40 rounded-xl hover:bg-slate-100/40 hover:border-slate-300 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200"
-              {...form.register('password')}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3.5 top-4 text-brand-secondary-text/50 hover:text-brand-secondary-text/80 active:scale-95 transition-all cursor-pointer"
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-            >
-              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-            </button>
-          </div>
-          <div className="flex justify-end mt-1.5">
+        <div className="space-y-2 text-left">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="password" className="text-sm font-bold text-slate-200 drop-shadow-sm">
+              {t.password}
+            </Label>
             <a
               href="#forgot"
               onClick={(e) => e.preventDefault()}
-              className="text-xs font-bold text-primary hover:text-primary-hover hover:underline transition-colors"
+              tabIndex={4}
+              className="rounded-sm text-[13px] font-bold text-white! drop-shadow-sm transition-colors hover:text-slate-200! hover:underline focus:outline-none focus:ring-2 focus:ring-white"
             >
               {t.forgot}
             </a>
           </div>
-          {form.formState.errors.password ? (
-            <p
-              className="text-xs text-red-600 mt-1 flex items-center gap-1 font-medium animate-in fade-in duration-200"
-              aria-live="polite"
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              autoComplete="current-password"
+              tabIndex={2}
+              className="h-12 rounded-xl border-slate-600 bg-slate-800/80 px-4 pr-12 text-[15px] text-white shadow-inner transition-colors hover:bg-slate-800 focus:border-slate-400 focus:bg-slate-800 focus:ring-1 focus:ring-slate-400 focus:outline-none"
+              {...form.register('password')}
+              aria-invalid={!!form.formState.errors.password}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              tabIndex={-1}
+              className="absolute inset-y-0 right-1 flex w-10 items-center justify-center rounded-xl text-slate-400 transition-colors hover:text-white focus:outline-none"
+              aria-label="Toggle password visibility"
             >
+              {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+            </button>
+          </div>
+          {form.formState.errors.password && (
+            <p className="mt-1.5 flex items-center gap-1 text-xs font-bold text-red-400 drop-shadow-sm animate-in fade-in">
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {getErrorMessage(form.formState.errors.password.message)}
             </p>
-          ) : null}
+          )}
         </div>
 
-        {/* Primary Submit Button */}
-        <Button
-          className="w-full mt-6 h-12 bg-primary text-white hover:bg-primary/95 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.985] transition-all duration-300 ease-out font-bold text-sm tracking-wide rounded-xl shadow-md shadow-primary/10 hover:shadow-lg hover:shadow-primary/25 cursor-pointer flex items-center justify-center gap-2 btn-shimmer"
-          type="submit"
-          disabled={login.isPending}
-        >
-          {login.isPending ? t.authenticating : t.login}
-        </Button>
+        <div className="pt-3">
+          <Button
+            type="submit"
+            disabled={login.isPending}
+            tabIndex={3}
+            className="btn-shimmer-dark flex h-12 w-full items-center justify-center rounded-xl bg-white text-[15px] font-bold text-slate-900 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-slate-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:translate-y-0 active:scale-95"
+          >
+            {login.isPending ? (
+              <>
+                <HeartWaveLoader label={t.authenticating} className="h-9 w-9 text-slate-900" />
+                <span>{t.authenticating}</span>
+              </>
+            ) : (
+              t.login
+            )}
+          </Button>
+        </div>
+
+        <div className="pt-3 text-center text-[13px] font-medium text-slate-300 drop-shadow-sm">
+          {t.noAccount}{' '}
+          <a
+            href="#register"
+            onClick={(e) => e.preventDefault()}
+            tabIndex={5}
+            className="font-bold text-white transition-colors hover:underline"
+          >
+            {t.register}
+          </a>
+        </div>
       </form>
     </div>
   );
