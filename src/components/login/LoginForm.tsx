@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { HeartWaveLoader } from '@/components/feedback/HeartWaveLoader';
 import { useLogin } from '@/queries/auth.query';
 import { LoginFormValues, loginSchema } from '@/components/login/login.schema';
-import logoBlue from '@/assets/logo2.jpg';
+import logoBlue from '@/assets/logo2.png';
 
 interface LoginFormProps {
   currentLang: 'EN' | 'VI';

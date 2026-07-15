@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
+import doctorAvatar from '@/assets/doctor-avatar.png';
+import hospitalLogo from '@/assets/logo2.png';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import { Button } from '@/components/ui/button';
 import {
@@ -648,9 +650,13 @@ export default function DashboardLayout() {
               <Menu className="h-4 w-4" />
             </Button>
             <div className="flex items-center gap-3">
-              <div className="relative flex h-8 w-8 items-center justify-center rounded-[10px] bg-slate-900 text-white shadow-md ring-1 ring-slate-900/10">
-                <div className="absolute inset-0 rounded-[10px] bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
-                <span className="relative text-[15px] font-bold tracking-tighter">H</span>
+              <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-[8px] border border-slate-200 bg-white shadow-sm">
+                <img
+                  src={hospitalLogo}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-full w-full object-contain p-0.5"
+                />
               </div>
               <div className="hidden flex-col justify-center sm:flex">
                 <div className="text-[14px] font-bold leading-none tracking-tight text-slate-900">
@@ -743,9 +749,11 @@ export default function DashboardLayout() {
             <div className="mx-1 hidden h-4 w-px bg-slate-200 sm:block" />
             <LanguageSwitcher />
             <div className="hidden items-center gap-2 rounded-full py-1 pr-2 pl-1 transition-colors hover:bg-slate-50 sm:flex cursor-default ml-1">
-              <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-primary to-blue-500 text-[11px] font-bold text-white shadow-sm ring-1 ring-white/20">
-                {user?.fullName?.charAt(0).toUpperCase() ?? 'G'}
-              </div>
+              <img
+                src={doctorAvatar}
+                alt={user?.fullName ?? ''}
+                className="h-8 w-8 rounded-full border border-slate-200 bg-slate-100 object-cover object-[center_38%] shadow-sm"
+              />
               <div className="max-w-[120px] leading-tight">
                 <div className="truncate text-xs font-semibold text-slate-700">
                   {user?.fullName ?? 'Guest'}
