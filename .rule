@@ -48,3 +48,5 @@
     - Name page folders by domain and page purpose, for example `src/components/users/list`, `src/components/users/create`, `src/components/users/detail` and `src/components/employees/list`.
     - Keep the page component, child components, modal/popup components, text module, data module, schema and page-local types inside that page folder.
     - A parent domain folder may contain only page folders and genuinely shared domain components. Do not place multiple route-level page files together at the parent level.
+
+    test
