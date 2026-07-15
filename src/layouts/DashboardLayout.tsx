@@ -15,7 +15,7 @@ import {
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import doctorAvatar from '@/assets/doctor-avatar.png';
-import hospitalLogo from '@/assets/logo2.png';
+import hospitalLogo from '@/assets/logo2-removebg-preview.png';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import { Button } from '@/components/ui/button';
 import {
@@ -650,12 +650,12 @@ export default function DashboardLayout() {
               <Menu className="h-4 w-4" />
             </Button>
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-[8px] border border-slate-200 bg-white shadow-sm">
+              <div className="flex h-8 w-8 items-center justify-center">
                 <img
                   src={hospitalLogo}
                   alt=""
                   aria-hidden="true"
-                  className="h-full w-full object-contain p-0.5"
+                  className="h-full w-full object-contain scale-110"
                 />
               </div>
               <div className="hidden flex-col justify-center sm:flex">

@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { HeartWaveLoader } from '@/components/feedback/HeartWaveLoader';
 import { useLogin } from '@/queries/auth.query';
 import { LoginFormValues, loginSchema } from '@/components/login/login.schema';
-import logoBlue from '@/assets/logo2.png';
+import logoBlue from '@/assets/logo2-removebg-preview.png';
 
 interface LoginFormProps {
   currentLang: 'EN' | 'VI';
@@ -89,28 +89,26 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
   return (
     <div className="w-full">
       <div className="mb-10 text-center">
-        <div className="mb-8 flex justify-center">
-          <div className="inline-flex rounded-2xl bg-white p-3 shadow-md">
-            <img
-              src={logoBlue}
-              alt={t.logoAlt}
-              className="h-10 w-auto object-contain mix-blend-multiply"
-            />
-          </div>
+        <div className="mb-4 flex justify-center">
+          <img
+            src={logoBlue}
+            alt={t.logoAlt}
+            className="h-40 w-auto object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105"
+          />
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-white drop-shadow-md">{t.hi}</h1>
-        <p className="mt-2.5 text-[15px] font-medium text-slate-300 drop-shadow-sm">{t.welcome}</p>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 drop-shadow-sm">{t.hi}</h1>
+        <p className="mt-2.5 text-[15px] font-medium text-slate-600">{t.welcome}</p>
       </div>
 
       {login.error && (
         <div
-          className="mb-6 flex gap-3 rounded-xl border border-red-500/50 bg-red-900/60 p-4 text-sm text-white shadow-sm animate-in fade-in duration-300"
+          className="mb-6 flex gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-slate-900 shadow-sm animate-in fade-in duration-300"
           aria-live="polite"
         >
-          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-400" aria-hidden="true" />
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" aria-hidden="true" />
           <div>
-            <h5 className="font-bold leading-none drop-shadow-sm">{t.failed}</h5>
-            <p className="mt-1.5 text-xs font-medium leading-relaxed text-red-200 drop-shadow-sm">
+            <h5 className="font-bold leading-none text-red-700">{t.failed}</h5>
+            <p className="mt-1.5 text-xs font-medium leading-relaxed text-red-600">
               {t.failedDesc}
             </p>
           </div>
@@ -124,19 +122,19 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
         className="space-y-5"
       >
         <div className="space-y-2 text-left">
-          <Label htmlFor="username" className="text-sm font-bold text-slate-200 drop-shadow-sm">
+          <Label htmlFor="username" className="text-sm font-bold text-slate-700">
             {t.username}
           </Label>
           <Input
             id="username"
             autoComplete="username"
             tabIndex={1}
-            className="h-12 rounded-xl border-slate-600 bg-slate-800/80 px-4 text-[15px] text-white shadow-inner transition-colors hover:bg-slate-800 focus:border-slate-400 focus:bg-slate-800 focus:ring-1 focus:ring-slate-400 focus:outline-none"
+            className="h-12 rounded-xl border-slate-300 bg-white/80 px-4 text-[15px] text-slate-900 shadow-sm transition-colors hover:bg-white focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary focus:outline-none"
             {...form.register('username')}
             aria-invalid={!!form.formState.errors.username}
           />
           {form.formState.errors.username && (
-            <p className="mt-1.5 flex items-center gap-1 text-xs font-bold text-red-400 drop-shadow-sm animate-in fade-in">
+            <p className="mt-1.5 flex items-center gap-1 text-xs font-bold text-red-500 animate-in fade-in">
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {getErrorMessage(form.formState.errors.username.message)}
             </p>
@@ -145,14 +143,14 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
 
         <div className="space-y-2 text-left">
           <div className="flex items-center justify-between">
-            <Label htmlFor="password" className="text-sm font-bold text-slate-200 drop-shadow-sm">
+            <Label htmlFor="password" className="text-sm font-bold text-slate-700">
               {t.password}
             </Label>
             <a
               href="#forgot"
               onClick={(e) => e.preventDefault()}
               tabIndex={4}
-              className="rounded-sm text-[13px] font-bold text-white! drop-shadow-sm transition-colors hover:text-slate-200! hover:underline focus:outline-none focus:ring-2 focus:ring-white"
+              className="rounded-sm text-[13px] font-bold text-primary transition-colors hover:text-primary-hover hover:underline focus:outline-none focus:ring-2 focus:ring-primary"
             >
               {t.forgot}
             </a>
@@ -163,22 +161,31 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
               type={showPassword ? 'text' : 'password'}
               autoComplete="current-password"
               tabIndex={2}
-              className="h-12 rounded-xl border-slate-600 bg-slate-800/80 px-4 pr-12 text-[15px] text-white shadow-inner transition-colors hover:bg-slate-800 focus:border-slate-400 focus:bg-slate-800 focus:ring-1 focus:ring-slate-400 focus:outline-none"
-              {...form.register('password')}
+              className="h-12 rounded-xl border-slate-300 bg-white/80 px-4 pr-12 text-[15px] text-slate-900 shadow-sm transition-colors hover:bg-white focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary focus:outline-none"
+              {...form.register('password', {
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                  e.target.value = e.target.value.replace(/\s/g, '');
+                },
+              })}
+              onKeyDown={(e) => {
+                if (e.key === ' ') {
+                  e.preventDefault();
+                }
+              }}
               aria-invalid={!!form.formState.errors.password}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               tabIndex={-1}
-              className="absolute inset-y-0 right-1 flex w-10 items-center justify-center rounded-xl text-slate-400 transition-colors hover:text-white focus:outline-none"
+              className="absolute inset-y-0 right-1 flex w-10 items-center justify-center rounded-xl text-slate-500 transition-colors hover:text-slate-900 focus:outline-none"
               aria-label="Toggle password visibility"
             >
               {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
             </button>
           </div>
           {form.formState.errors.password && (
-            <p className="mt-1.5 flex items-center gap-1 text-xs font-bold text-red-400 drop-shadow-sm animate-in fade-in">
+            <p className="mt-1.5 flex items-center gap-1 text-xs font-bold text-red-500 animate-in fade-in">
               <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {getErrorMessage(form.formState.errors.password.message)}
             </p>
@@ -190,11 +197,11 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
             type="submit"
             disabled={login.isPending}
             tabIndex={3}
-            className="btn-shimmer-dark flex h-12 w-full items-center justify-center rounded-xl bg-white text-[15px] font-bold text-slate-900 shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-slate-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] active:translate-y-0 active:scale-95"
+            className="btn-shimmer flex h-12 w-full items-center justify-center rounded-xl bg-primary text-[15px] font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-primary-hover hover:shadow-lg active:translate-y-0 active:scale-95"
           >
             {login.isPending ? (
               <>
-                <HeartWaveLoader label={t.authenticating} className="h-9 w-9 text-slate-900" />
+                <HeartWaveLoader label={t.authenticating} className="h-9 w-9 text-white" />
                 <span>{t.authenticating}</span>
               </>
             ) : (
@@ -203,13 +210,13 @@ export default function LoginForm({ currentLang, onSubmitSuccess }: LoginFormPro
           </Button>
         </div>
 
-        <div className="pt-3 text-center text-[13px] font-medium text-slate-300 drop-shadow-sm">
+        <div className="pt-3 text-center text-[13px] font-medium text-slate-600">
           {t.noAccount}{' '}
           <a
             href="#register"
             onClick={(e) => e.preventDefault()}
             tabIndex={5}
-            className="font-bold text-white transition-colors hover:underline"
+            className="font-bold text-primary transition-colors hover:underline"
           >
             {t.register}
           </a>
