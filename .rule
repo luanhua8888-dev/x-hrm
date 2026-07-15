@@ -1,6 +1,6 @@
-# Project Rules for HUI HRM
+# Project Rules for HIU HRM
 
-1. **Clean up Test Files:** 
+1. **Clean up Test Files:**
    - Any test scripts, dump files, or temporary verification files (e.g., `dump.js`, `dump_out.txt`, `check.js`, `test.js`) created during debugging or development must be immediately deleted after the test is completed. Do not leave them lingering in the project directory.
 
 2. **UI/UX Color Palette:**
@@ -17,7 +17,7 @@
    - `FilterCustom` must remain compact. Advanced filters are collapsed by default and expand only when requested.
 
 5. **Design Aesthetics & Active States:**
-   - Avoid heavy, solid, dark background colors for active states, selected items, or standard buttons (e.g. avoid full `bg-slate-900` or `bg-primary` blocks for list items). 
+   - Avoid heavy, solid, dark background colors for active states, selected items, or standard buttons (e.g. avoid full `bg-slate-900` or `bg-primary` blocks for list items).
    - Prefer subtle background tints (e.g. `bg-primary/10`, `bg-slate-50`), ghost styles, or left-border highlights with colored text/icons for active selections.
    - Keep padding compact, borders minimal, and avoid unnecessary nested background colors to ensure a clean, uncluttered, "flat" enterprise interface.
 
@@ -31,20 +31,20 @@
    - Do not use kebab-case or snake_case for files. Names such as `popup-custom.tsx`, `table_custom.tsx`, and `the-infinite-grid.tsx` are prohibited.
    - Page-specific components, popups, modals, schemas, and local types must stay inside that page's folder under `src/components`.
 
-7. **No Hardcoded UI Text:**
+8. **No Hardcoded UI Text:**
    - React components and page files must not contain hardcoded user-visible text.
    - Every page folder must provide its own PascalCase text module, for example `src/components/organization/company/CompanyText.ts`.
    - Titles, descriptions, labels, placeholders, statuses, validation errors, empty states, accessibility labels, modal content and confirmation messages must be referenced by a named key from that page's text module.
    - Vietnamese and English values must be declared together in the text module. Components may only request a text key for the active locale.
    - Mock records and user-visible seed data must be placed in a separate page-owned data file, never inline in the React component.
 
-8. **Conditional Expressions:**
+9. **Conditional Expressions:**
    - Prefer the ternary operator (`condition ? valueA : valueB`) over `if/else` when the condition selects between two simple values, assignments, component props or JSX branches.
    - Use `if/else` when branches contain multiple statements, side effects, early returns or complex business logic.
    - Do not nest ternary expressions. Extract complex conditions into named variables or functions instead.
 
-9. **Page-Owned Folder Structure:**
-   - Every route-level page must have its own folder under `src/components`, including list, create, detail and edit pages.
-   - Name page folders by domain and page purpose, for example `src/components/users/list`, `src/components/users/create`, `src/components/users/detail` and `src/components/employees/list`.
-   - Keep the page component, child components, modal/popup components, text module, data module, schema and page-local types inside that page folder.
-   - A parent domain folder may contain only page folders and genuinely shared domain components. Do not place multiple route-level page files together at the parent level.
+10. **Page-Owned Folder Structure:**
+    - Every route-level page must have its own folder under `src/components`, including list, create, detail and edit pages.
+    - Name page folders by domain and page purpose, for example `src/components/users/list`, `src/components/users/create`, `src/components/users/detail` and `src/components/employees/list`.
+    - Keep the page component, child components, modal/popup components, text module, data module, schema and page-local types inside that page folder.
+    - A parent domain folder may contain only page folders and genuinely shared domain components. Do not place multiple route-level page files together at the parent level.

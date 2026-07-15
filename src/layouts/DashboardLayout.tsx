@@ -418,7 +418,7 @@ function GuideModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       <div className="relative flex w-full max-w-2xl flex-col rounded-2xl bg-white shadow-2xl animate-in zoom-in-95">
         <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
           <h2 className="text-lg font-bold text-slate-900">
-            <Trans>Hướng dẫn sử dụng HUI HRM</Trans>
+            <Trans>Hướng dẫn sử dụng HIU HRM</Trans>
           </h2>
           <button
             onClick={onClose}
@@ -444,7 +444,7 @@ function GuideModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             <CircleHelp className="mx-auto mb-3 h-10 w-10 text-slate-300" />
             <h3 className="mb-2 text-base font-bold text-slate-900">Tài liệu đang được cập nhật</h3>
             <p className="text-sm text-slate-500">
-              Cảm ơn bạn đã sử dụng HUI HRM. Tài liệu hướng dẫn sử dụng chi tiết cho từng phân hệ
+              Cảm ơn bạn đã sử dụng HIU HRM. Tài liệu hướng dẫn sử dụng chi tiết cho từng phân hệ
               hiện đang trong quá trình hoàn thiện và sẽ sớm được ra mắt trong bản cập nhật tới.
             </p>
             <button
@@ -528,7 +528,7 @@ function BreadcrumbBar() {
 
   return (
     <div className="flex h-10 items-center gap-1 border-b border-brand-border bg-white px-4 text-xs">
-      <span className="text-brand-secondary-text">HUI HRM</span>
+      <span className="text-brand-secondary-text">HIU HRM</span>
       {segments.map((segment) => (
         <span key={segment.path} className="flex items-center gap-1">
           <ChevronRight className="h-3 w-3 text-slate-400" />
@@ -654,7 +654,7 @@ export default function DashboardLayout() {
               </div>
               <div className="hidden flex-col justify-center sm:flex">
                 <div className="text-[14px] font-bold leading-none tracking-tight text-slate-900">
-                  HUI HRM
+                  HIU HRM
                 </div>
                 <div className="mt-1 text-[10px] font-semibold leading-none tracking-[0.06em] text-slate-400 uppercase">
                   <Trans>Quản trị nhân sự</Trans>
@@ -781,7 +781,7 @@ export default function DashboardLayout() {
             <div className="absolute inset-y-0 left-0 w-72 bg-white shadow-xl">
               <div className="flex h-12 items-center justify-between border-b border-brand-border px-3">
                 <span className="text-sm font-bold">
-                  HUI HRM · <Trans>Phân hệ</Trans>
+                  HIU HRM · <Trans>Phân hệ</Trans>
                 </span>
                 <Button
                   variant="ghost"
