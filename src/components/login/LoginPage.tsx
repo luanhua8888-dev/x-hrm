@@ -23,7 +23,7 @@ export default function LoginPage() {
   const redirectTo = locationState?.from?.pathname ?? '/dashboard';
 
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(true);
 
   const currentLang = i18n.locale === 'vi' ? 'VI' : 'EN';
 

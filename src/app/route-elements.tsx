@@ -13,6 +13,7 @@ const UserCreatePage = lazy(() => import('@/components/users/create/UserCreatePa
 const UserDetailPage = lazy(() => import('@/components/users/detail/UserDetailPage'));
 const UserListPage = lazy(() => import('@/components/users/list/UserListPage'));
 const AdministrationPage = lazy(() => import('@/components/administration/AdministrationPage'));
+const WorkforcePage = lazy(() => import('@/features/workforce-attendance/pages/WorkforcePage'));
 
 function withPageLoading(element: ReactNode) {
   return <Suspense fallback={<PageLoading />}>{element}</Suspense>;
@@ -82,6 +83,9 @@ export function EmployeeRecordsRouteElement() {
 
 export function LoginRouteElement() {
   return withPageLoading(<LoginPage />);
+}
+export function WorkforceRouteElement() {
+  return withPageLoading(<WorkforcePage />);
 }
 
 export function NotFoundRouteElement() {
