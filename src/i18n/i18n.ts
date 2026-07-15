@@ -5,7 +5,7 @@ import { messages as viMessages } from '@/locales/vi/messages.po';
 export const supportedLocales = ['vi', 'en'] as const;
 export type SupportedLocale = (typeof supportedLocales)[number];
 
-const LOCALE_STORAGE_KEY = 'hui-hrm.locale';
+const LOCALE_STORAGE_KEY = 'hiu-hrm.locale';
 
 function isSupportedLocale(value: string | null): value is SupportedLocale {
   return supportedLocales.includes(value as SupportedLocale);
@@ -28,7 +28,7 @@ export async function activateLocale(locale: SupportedLocale) {
   i18n.activate(locale);
   localStorage.setItem(LOCALE_STORAGE_KEY, locale);
   document.documentElement.lang = locale;
-  window.dispatchEvent(new CustomEvent('hui-hrm:locale-change', { detail: locale }));
+  window.dispatchEvent(new CustomEvent('hiu-hrm:locale-change', { detail: locale }));
 }
 
 export { i18n };

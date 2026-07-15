@@ -36,8 +36,8 @@ export function AppProviders({ children }: AppProvidersProps) {
       setLocale(nextLocale);
     };
 
-    window.addEventListener('hui-hrm:locale-change', handleLocaleChange);
-    return () => window.removeEventListener('hui-hrm:locale-change', handleLocaleChange);
+    window.addEventListener('hiu-hrm:locale-change', handleLocaleChange);
+    return () => window.removeEventListener('hiu-hrm:locale-change', handleLocaleChange);
   }, []);
 
   return (
