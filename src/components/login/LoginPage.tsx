@@ -35,12 +35,12 @@ export default function LoginPage() {
     <main className="flex h-[100dvh] w-full items-center justify-center bg-slate-200/80 p-2 sm:p-3 lg:p-4">
       {/* Outer Card Wrapper - Zooms in softly */}
       <div className="relative flex h-full w-full max-w-[1920px] items-center justify-center overflow-hidden rounded-[1.5rem] shadow-2xl ring-1 ring-slate-900/5 lg:justify-start lg:p-20 xl:p-28 animate-in fade-in zoom-in-[0.98] duration-1000 ease-out">
-        {/* Background Image - Continuous Cinematic Panning (Ken Burns) */}
-        <div className="absolute inset-0 h-full w-full">
+        {/* Background Image */}
+        <div className="absolute inset-0 h-full w-full bg-[#cbd5e1]">
           <img
             src={hospitalBackground}
             alt="Hospital Background"
-            className="absolute inset-0 h-full w-full object-cover object-center animate-ken-burns will-change-transform"
+            className="absolute inset-0 h-full w-full object-cover object-center sm:object-right"
           />
         </div>
 
@@ -102,12 +102,15 @@ export default function LoginPage() {
 
         {/* Floating Transparent Form Container */}
         {isFormVisible && (
-          <section className="relative z-10 w-full max-w-[420px] rounded-[2rem] border border-slate-700/50 bg-slate-900/85 p-8 shadow-[0_16px_40px_rgba(0,0,0,0.3)] sm:p-10 animate-in fade-in slide-in-from-bottom-8 zoom-in-95 duration-500 fill-mode-both">
+          <section className="group relative z-10 w-full max-w-[420px] rounded-[2rem] border border-white/60 bg-white/80 backdrop-blur-2xl p-8 shadow-[0_16px_40px_rgba(0,0,0,0.15)] sm:p-10 transition-all duration-500 hover:-translate-y-2 hover:bg-white/95 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] hover:border-white/80 animate-in fade-in slide-in-from-bottom-8 zoom-in-95 fill-mode-both">
+            {/* Soft Glow behind card on hover */}
+            <div className="absolute -inset-0.5 -z-10 rounded-[2rem] bg-gradient-to-b from-white/40 to-white/0 opacity-0 blur transition-opacity duration-500 group-hover:opacity-100" />
+
             {/* Close 'X' Button on the Form */}
             <button
               type="button"
               onClick={() => setIsFormVisible(false)}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-white focus:outline-none"
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-200/50 hover:text-slate-900 focus:outline-none"
               aria-label="Close form"
             >
               <X className="h-5 w-5" />
