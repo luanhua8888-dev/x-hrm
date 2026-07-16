@@ -40,6 +40,22 @@ export interface CreateEmployeeRequest {
   middleName?: string;
   lastName: string;
   employeeNumber?: string;
+  preferredName?: string;
+  email?: string;
+  phone?: string;
+  gender?: Employee['gender'];
+  dateOfBirth?: string;
+  nationalId?: string;
+  workType?: Employee['workType'];
+  employmentType?: Employee['employmentType'];
+  contractEndDate?: string;
+  maritalStatus?: Employee['maritalStatus'];
+  address?: string;
+  jobTitle?: string;
+  department?: string;
+  location?: string;
+  supervisorName?: string;
+  joinedDate?: string;
 }
 
 export interface UpdateEmployeeRequest {

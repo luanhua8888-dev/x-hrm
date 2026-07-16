@@ -5,6 +5,7 @@ import {
   AdministrationRouteElement,
   DashboardRouteElement,
   EmployeeListRouteElement,
+  EmployeeCreateRouteElement,
   LeaveMyLeaveRouteElement,
   LeaveRequestsRouteElement,
   LeaveCalendarRouteElement,
@@ -97,7 +98,6 @@ export const router = createBrowserRouter([
             element: <PermissionRoute permission={PERMISSIONS.EMPLOYEE_VIEW} />,
             children: [
               { path: '/employees', element: <EmployeeListRouteElement /> },
-              { path: '/employees/new', element: <EmployeeListRouteElement /> },
               { path: '/employees/:employeeId', element: <EmployeeListRouteElement /> },
               { path: '/employees/:employeeId/personal', element: <EmployeeListRouteElement /> },
               { path: '/employees/:employeeId/contact', element: <EmployeeListRouteElement /> },
@@ -113,6 +113,10 @@ export const router = createBrowserRouter([
                 element: <EmployeeListRouteElement />,
               },
             ],
+          },
+          {
+            element: <PermissionRoute permission={PERMISSIONS.EMPLOYEE_CREATE} />,
+            children: [{ path: '/employees/new', element: <EmployeeCreateRouteElement /> }],
           },
           {
             element: <PermissionRoute permission={PERMISSIONS.LEAVE_VIEW} />,
