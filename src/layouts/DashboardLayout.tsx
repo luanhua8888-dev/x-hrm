@@ -16,6 +16,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import doctorAvatar from '@/assets/doctor-avatar.png';
 import hospitalLogo from '@/assets/logo2-removebg-preview.png';
+import LogoutConfirmationDialog from '@/components/layout/LogoutConfirmationDialog';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import { Button } from '@/components/ui/button';
 import {
@@ -320,7 +321,7 @@ function NotificationsPopover({ isOpen, onClose }: { isOpen: boolean; onClose: (
             <Trans>Thông báo</Trans>
           </span>
           <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">
-            2 mới
+            <Trans>2 mới</Trans>
           </span>
         </div>
         <div className="max-h-80 overflow-y-auto p-1">
@@ -406,7 +407,7 @@ function HelpPopover({
         </button>
         <div className="my-1 border-t border-slate-100" />
         <div className="px-3 py-1.5 text-[10px] text-slate-400 text-center">
-          Phiên bản 0.1.0-alpha
+          <Trans>Phiên bản 0.1.0-alpha</Trans>
         </div>
       </div>
     </>
@@ -444,16 +445,20 @@ function GuideModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <div className="p-6">
           <div className="rounded-xl bg-slate-50 p-6 text-center">
             <CircleHelp className="mx-auto mb-3 h-10 w-10 text-slate-300" />
-            <h3 className="mb-2 text-base font-bold text-slate-900">Tài liệu đang được cập nhật</h3>
+            <h3 className="mb-2 text-base font-bold text-slate-900">
+              <Trans>Tài liệu đang được cập nhật</Trans>
+            </h3>
             <p className="text-sm text-slate-500">
-              Cảm ơn bạn đã sử dụng HIU HRM. Tài liệu hướng dẫn sử dụng chi tiết cho từng phân hệ
-              hiện đang trong quá trình hoàn thiện và sẽ sớm được ra mắt trong bản cập nhật tới.
+              <Trans>
+                Cảm ơn bạn đã sử dụng HIU HRM. Tài liệu hướng dẫn sử dụng chi tiết cho từng phân hệ
+                hiện đang trong quá trình hoàn thiện và sẽ sớm được ra mắt trong bản cập nhật tới.
+              </Trans>
             </p>
             <button
               onClick={onClose}
               className="mt-6 rounded-lg bg-slate-900 px-6 py-2 text-sm font-semibold text-white hover:bg-slate-800"
             >
-              Đóng lại
+              <Trans>Đóng lại</Trans>
             </button>
           </div>
         </div>
@@ -500,7 +505,9 @@ function ShortcutsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                 { desc: 'Mở trung tâm báo cáo', keys: ['G', 'R'] },
               ].map((shortcut, i) => (
                 <tr key={i} className="border-b border-slate-50 last:border-0">
-                  <td className="px-4 py-3 font-medium text-slate-600">{shortcut.desc}</td>
+                  <td className="px-4 py-3 font-medium text-slate-600">
+                    <Trans>{shortcut.desc}</Trans>
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex justify-end gap-1">
                       {shortcut.keys.map((k) => (
@@ -563,6 +570,7 @@ export default function DashboardLayout() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
 
   const allLinks = useMemo(() => {
     const flat: { title: string; path: string; icon?: React.ElementType }[] = [];
@@ -587,6 +595,7 @@ export default function DashboardLayout() {
   }, []);
 
   const handleLogout = () => {
+    setIsLogoutConfirmOpen(false);
     logout.mutate(undefined, {
       onSettled: () => void navigate('/login', { replace: true }),
     });
@@ -636,6 +645,11 @@ export default function DashboardLayout() {
       />
       <GuideModal isOpen={isGuideOpen} onClose={() => setIsGuideOpen(false)} />
       <ShortcutsModal isOpen={isShortcutsOpen} onClose={() => setIsShortcutsOpen(false)} />
+      <LogoutConfirmationDialog
+        open={isLogoutConfirmOpen}
+        onClose={() => setIsLogoutConfirmOpen(false)}
+        onConfirm={handleLogout}
+      />
 
       <header className="fixed inset-x-0 top-0 z-40 border-b border-slate-200/80 bg-white/80 shadow-sm backdrop-blur-md">
         <div className="flex h-12 items-center px-2 lg:px-0">
@@ -756,17 +770,17 @@ export default function DashboardLayout() {
               />
               <div className="max-w-[120px] leading-tight">
                 <div className="truncate text-xs font-semibold text-slate-700">
-                  {user?.fullName ?? 'Guest'}
+                  {user?.fullName ?? <Trans>Khách</Trans>}
                 </div>
                 <div className="truncate text-[10px] text-slate-400">
-                  {user?.email ?? 'Signed in'}
+                  {user?.email ?? <Trans>Đã đăng nhập</Trans>}
                 </div>
               </div>
             </div>
             <Button
               variant="ghost"
               size="compact-icon"
-              onClick={handleLogout}
+              onClick={() => setIsLogoutConfirmOpen(true)}
               aria-label="Logout"
               className="h-8 w-8 rounded-full text-slate-400 transition-colors hover:bg-rose-50 hover:text-rose-600"
             >

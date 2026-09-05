@@ -1,24 +1,24 @@
 import { useLingui } from '@lingui/react';
 import type { ColumnDef } from '@tanstack/react-table';
-import { MoreHorizontal, Plus } from 'lucide-react';
+import { Eye, Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { FilterCustom } from '@/components/common/FilterCustom';
 import { TableCustom } from '@/components/common/TableCustom';
+import {
+  LeaveRequestDetailDialog,
+  LeaveRequestDialog,
+} from '@/components/leave/my-leave/LeaveRequestDialogs';
+import {
+  CreateLeaveRequestInput,
+  MyLeaveRow,
+  MyLeaveStatus,
+  createLeaveRequest,
+} from '@/components/leave/my-leave/my-leave.model';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-interface MyLeaveRow {
-  id: string;
-  type: string;
-  fromDate: string;
-  toDate: string;
-  days: number;
-  reason: string;
-  status: 'pending' | 'approved' | 'rejected';
-}
-
-const mockData: MyLeaveRow[] = [
+const initialLeaveRequests: MyLeaveRow[] = [
   {
     id: 'LV-2026-001',
     type: 'Phép năm',
@@ -50,7 +50,11 @@ const mockData: MyLeaveRow[] = [
 
 export default function MyLeavePage() {
   const { i18n } = useLingui();
+  const [leaveRequests, setLeaveRequests] = useState(initialLeaveRequests);
   const [keyword, setKeyword] = useState('');
+  const [status, setStatus] = useState<MyLeaveStatus | ''>('');
+  const [isRequestDialogOpen, setIsRequestDialogOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<MyLeaveRow | null>(null);
 
   const columns = useMemo<ColumnDef<MyLeaveRow>[]>(
     () => [
@@ -86,6 +90,7 @@ export default function MyLeavePage() {
             pending: { label: 'Chờ duyệt', className: 'bg-amber-50 text-amber-700' },
             approved: { label: 'Đã duyệt', className: 'bg-emerald-50 text-emerald-700' },
             rejected: { label: 'Từ chối', className: 'bg-red-50 text-red-700' },
+            cancelled: { label: 'Đã hủy', className: 'bg-slate-100 text-slate-600' },
           };
           const st = statusMap[row.original.status];
           return (
@@ -100,9 +105,14 @@ export default function MyLeavePage() {
         header: '',
         size: 50,
         enableSorting: false,
-        cell: () => (
-          <Button variant="ghost" size="compact-icon">
-            <MoreHorizontal className="h-4 w-4 text-slate-400" />
+        cell: ({ row }) => (
+          <Button
+            variant="ghost"
+            size="compact-icon"
+            onClick={() => setSelectedRequest(row.original)}
+            aria-label={`Xem đơn ${row.original.id}`}
+          >
+            <Eye className="h-4 w-4 text-slate-500" />
           </Button>
         ),
       },
@@ -112,18 +122,40 @@ export default function MyLeavePage() {
 
   const data = useMemo(
     () =>
-      mockData.filter(
+      leaveRequests.filter(
         (item) =>
-          item.id.toLowerCase().includes(keyword.toLowerCase()) ||
-          item.reason.toLowerCase().includes(keyword.toLowerCase()),
+          (!status || item.status === status) &&
+          (item.id.toLowerCase().includes(keyword.toLowerCase()) ||
+            item.reason.toLowerCase().includes(keyword.toLowerCase()) ||
+            item.type.toLowerCase().includes(keyword.toLowerCase())),
       ),
-    [keyword],
+    [keyword, leaveRequests, status],
   );
+
+  const createRequest = (input: CreateLeaveRequestInput) => {
+    setLeaveRequests((current) => [createLeaveRequest(input, current.length), ...current]);
+    setIsRequestDialogOpen(false);
+  };
+
+  const cancelRequest = (id: string) => {
+    setLeaveRequests((current) =>
+      current.map((request) =>
+        request.id === id ? { ...request, status: 'cancelled' as const } : request,
+      ),
+    );
+    setSelectedRequest((current) =>
+      current?.id === id ? { ...current, status: 'cancelled' } : current,
+    );
+  };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-end border-b border-slate-100 pb-2">
-        <Button size="sm" className="h-8 bg-primary text-xs hover:bg-primary-hover">
+        <Button
+          size="sm"
+          className="h-8 bg-primary text-xs hover:bg-primary-hover"
+          onClick={() => setIsRequestDialogOpen(true)}
+        >
           <Plus className="mr-1.5 h-3.5 w-3.5" />
           {i18n.locale === 'en' ? 'Request Leave' : 'Tạo đơn phép'}
         </Button>
@@ -132,7 +164,25 @@ export default function MyLeavePage() {
       <FilterCustom
         keyword={keyword}
         onKeywordChange={setKeyword}
-        onReset={() => setKeyword('')}
+        fields={[
+          {
+            key: 'status',
+            label: i18n.locale === 'en' ? 'Status' : 'Trạng thái',
+            options: [
+              { label: i18n.locale === 'en' ? 'All statuses' : 'Tất cả trạng thái', value: '' },
+              { label: i18n.locale === 'en' ? 'Pending' : 'Chờ duyệt', value: 'pending' },
+              { label: i18n.locale === 'en' ? 'Approved' : 'Đã duyệt', value: 'approved' },
+              { label: i18n.locale === 'en' ? 'Rejected' : 'Từ chối', value: 'rejected' },
+              { label: i18n.locale === 'en' ? 'Cancelled' : 'Đã hủy', value: 'cancelled' },
+            ],
+          },
+        ]}
+        values={{ status }}
+        onFilterChange={(_, value) => setStatus(value as MyLeaveStatus | '')}
+        onReset={() => {
+          setKeyword('');
+          setStatus('');
+        }}
         placeholder={i18n.locale === 'en' ? 'Search leave records...' : 'Tìm kiếm đơn phép...'}
       />
 
@@ -147,6 +197,16 @@ export default function MyLeavePage() {
             ? 'You have not submitted any leave requests yet.'
             : 'Bạn chưa tạo đơn xin nghỉ phép nào.'
         }
+      />
+      <LeaveRequestDialog
+        open={isRequestDialogOpen}
+        onClose={() => setIsRequestDialogOpen(false)}
+        onCreate={createRequest}
+      />
+      <LeaveRequestDetailDialog
+        request={selectedRequest}
+        onClose={() => setSelectedRequest(null)}
+        onCancel={cancelRequest}
       />
     </div>
   );

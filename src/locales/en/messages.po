@@ -327,3 +327,237 @@ msgstr "Report preview"
 #: src/layouts/DashboardLayout.tsx
 msgid "Yêu cầu"
 msgstr "Requests"
+
+msgid "Tổng nhân sự"
+msgstr "Total headcount"
+
+msgid "Nhân sự mới"
+msgstr "New hires"
+
+msgid "Vắng mặt"
+msgstr "Absent"
+
+msgid "Cần duyệt"
+msgstr "Pending approval"
+
+msgid "Tỷ lệ đi làm tuần này"
+msgstr "Attendance rate this week"
+
+msgid "Chi tiết"
+msgstr "Details"
+
+msgid "Cần xử lý"
+msgstr "Needs attention"
+
+msgid "Duyệt đơn nghỉ phép"
+msgstr "Approve leave request"
+
+msgid "Đánh giá thử việc"
+msgstr "Review probation"
+
+msgid "Duyệt yêu cầu thiết bị"
+msgstr "Approve equipment request"
+
+msgid "2h trước"
+msgstr "2h ago"
+
+msgid "4h trước"
+msgstr "4h ago"
+
+msgid "1n trước"
+msgstr "1d ago"
+
+msgid "Xem tất cả"
+msgstr "View all"
+
+msgid "Thao tác nhanh"
+msgstr "Quick actions"
+
+msgid "Thêm nhân viên"
+msgstr "Add employee"
+
+msgid "Tạo đơn phép"
+msgstr "Create leave request"
+
+msgid "Đăng tuyển dụng"
+msgstr "Post a job"
+
+msgid "Tạo báo cáo"
+msgstr "Create report"
+
+msgid "Vị trí"
+msgstr "Positions"
+
+msgid "Sự kiện sắp tới"
+msgstr "Upcoming events"
+
+msgid "Hoạt động"
+msgstr "Activity"
+
+msgid "duyệt phép"
+msgstr "approved leave"
+
+msgid "10p trước"
+msgstr "10m ago"
+
+msgid "tính lương"
+msgstr "ran payroll"
+
+msgid "3h trước"
+msgstr "3h ago"
+
+msgid "4h trước"
+msgstr "4h ago"
+
+msgid "1n trước"
+msgstr "1d ago"
+
+msgid "Lập trình viên"
+msgstr "Engineering"
+
+msgid "Thiết kế"
+msgstr "Design"
+
+msgid "Marketing"
+msgstr "Marketing"
+
+msgid "Frontend Dev"
+msgstr "Frontend developer"
+
+msgid "HR Manager"
+msgstr "HR manager"
+
+msgid "UI/UX Designer"
+msgstr "UI/UX designer"
+
+msgid "2 mới"
+msgstr "2 new"
+
+msgid "Phiên bản 0.1.0-alpha"
+msgstr "Version 0.1.0-alpha"
+
+msgid "Tài liệu đang được cập nhật"
+msgstr "Documentation is being updated"
+
+msgid "Cảm ơn bạn đã sử dụng HIU HRM. Tài liệu hướng dẫn sử dụng chi tiết cho từng phân hệ hiện đang trong quá trình hoàn thiện và sẽ sớm được ra mắt trong bản cập nhật tới."
+msgstr "Thank you for using HIU HRM. Detailed documentation for each module is being completed and will be available in a future update."
+
+msgid "Đóng lại"
+msgstr "Close"
+
+msgid "Mở thanh tìm kiếm (Command Palette)"
+msgstr "Open search (Command Palette)"
+
+msgid "Đóng cửa sổ hiện tại"
+msgstr "Close current window"
+
+msgid "Trở về trang chủ"
+msgstr "Go to home"
+
+msgid "Mở trung tâm báo cáo"
+msgstr "Open reports center"
+
+msgid "Khách"
+msgstr "Guest"
+
+msgid "Đã đăng nhập"
+msgstr "Signed in"
+
+msgid "Khoảng thời gian"
+msgstr "Time range"
+
+msgid "Tuần này"
+msgstr "This week"
+
+msgid "Tháng này"
+msgstr "This month"
+
+msgid "Quý này"
+msgstr "This quarter"
+
+msgid "Cập nhật lúc"
+msgstr "Updated at"
+
+msgid "Làm mới dữ liệu"
+msgstr "Refresh data"
+
+msgid "Làm mới"
+msgstr "Refresh"
+
+msgid "Tình hình hôm nay"
+msgstr "Today's workforce"
+
+msgid "Giờ vào"
+msgstr "Check-in"
+
+msgid "Trạng thái"
+msgstr "Status"
+
+msgid "Đang làm việc"
+msgstr "Working"
+
+msgid "Đi trễ"
+msgstr "Late"
+
+msgid "Yêu cầu nghỉ phép"
+msgstr "Leave requests"
+
+msgid "Chờ duyệt"
+msgstr "Pending"
+
+msgid "Đã duyệt"
+msgstr "Approved"
+
+msgid "Đã từ chối"
+msgstr "Rejected"
+
+msgid "Nghỉ phép năm"
+msgstr "Annual leave"
+
+msgid "Nghỉ bệnh"
+msgstr "Sick leave"
+
+msgid "Làm việc từ xa"
+msgstr "Remote work"
+
+msgid "1 ngày"
+msgstr "1 day"
+
+msgid "2 ngày"
+msgstr "2 days"
+
+msgid "Duyệt"
+msgstr "Approve"
+
+msgid "Từ chối"
+msgstr "Reject"
+
+msgid "Duyệt đơn của {employee}"
+msgstr "Approve request from {employee}"
+
+msgid "Từ chối đơn của {employee}"
+msgstr "Reject request from {employee}"
+
+msgid "Trung tâm cảnh báo"
+msgstr "Alert center"
+
+msgid "Hợp đồng sắp hết hạn"
+msgstr "Contracts expiring soon"
+
+msgid "5 hợp đồng hết hạn trong 30 ngày"
+msgstr "5 contracts expire within 30 days"
+
+msgid "Thiếu dữ liệu chấm công"
+msgstr "Missing attendance data"
+
+msgid "8 nhân viên cần bổ sung giờ ra"
+msgstr "8 employees need to add a check-out time"
+
+msgid "Sinh nhật trong tuần"
+msgstr "Birthdays this week"
+
+msgid "3 nhân viên có sinh nhật sắp tới"
+msgstr "3 employees have upcoming birthdays"
+
+msgid "Kỹ thuật"
+msgstr "Engineering"
