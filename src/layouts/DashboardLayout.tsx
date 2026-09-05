@@ -536,7 +536,7 @@ function BreadcrumbBar() {
   const segments = resolveBreadcrumb(location.pathname);
 
   return (
-    <div className="flex h-10 items-center gap-1 border-b border-brand-border bg-white px-4 text-xs">
+    <div className="sticky top-12 z-30 flex h-8 items-center gap-1 border-b border-brand-border bg-white px-4 text-xs shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
       <span className="text-brand-secondary-text">HIU HRM</span>
       {segments.map((segment) => (
         <span key={segment.path} className="flex items-center gap-1">
@@ -637,7 +637,7 @@ export default function DashboardLayout() {
   );
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-brand-bg">
+    <div className="flex min-h-screen flex-col overflow-x-clip bg-brand-bg">
       <CommandPalette
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
@@ -825,12 +825,12 @@ export default function DashboardLayout() {
 
         <div
           className={cn(
-            'min-w-0 flex-1 overflow-x-hidden transition-[margin]',
+            'min-w-0 flex-1 overflow-x-clip transition-[margin]',
             isCollapsed ? 'lg:ml-14' : 'lg:ml-60',
           )}
         >
           <BreadcrumbBar />
-          <main className="w-full overflow-x-hidden p-3 lg:p-4">
+          <main className="w-full overflow-x-clip p-3 lg:p-4">
             <Outlet />
           </main>
         </div>

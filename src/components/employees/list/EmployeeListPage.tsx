@@ -1,5 +1,7 @@
 import { useLingui } from '@lingui/react';
+import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { FilterCustom } from '@/components/common/FilterCustom';
 import { TableCustom } from '@/components/common/TableCustom';
@@ -12,6 +14,8 @@ import {
   type EmployeeTextKey,
 } from '@/components/employees/list/EmployeeText';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
+import { hasPermission, PERMISSIONS } from '@/config/permissions';
+import { useAuthStore } from '@/stores/auth.store';
 import type { EmployeeStatus } from '@/types/employee/employee';
 
 const statusFilterOptions = [
@@ -25,6 +29,8 @@ const statusFilterOptions = [
 export default function EmployeeListPage() {
   const { i18n } = useLingui();
   const tr = (key: EmployeeTextKey) => getEmployeeText(i18n.locale, key);
+  const permissions = useAuthStore((state) => state.user?.permissions);
+  const canCreateEmployee = hasPermission(permissions, PERMISSIONS.EMPLOYEE_CREATE);
   const [employees, setEmployees] = useState(() => employeeMockData);
   const [keyword, setKeyword] = useState('');
   const [status, setStatus] = useState<EmployeeStatus | ''>('');
@@ -75,6 +81,18 @@ export default function EmployeeListPage() {
 
   return (
     <div className="space-y-4">
+      <div className="flex items-center justify-end border-b border-brand-border pb-2">
+        {canCreateEmployee ? (
+          <Link
+            to="/employees/new"
+            className="inline-flex h-8 items-center justify-center gap-2 rounded-sm bg-primary px-3 text-xs font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <Plus className="h-4 w-4" aria-hidden="true" />
+            {tr('addEmployee')}
+          </Link>
+        ) : null}
+      </div>
+
       <header className="space-y-3 border-b border-brand-border pb-3">
         <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
           <SummaryCard label={tr('totalEmployees')} value={String(summary.total)} />

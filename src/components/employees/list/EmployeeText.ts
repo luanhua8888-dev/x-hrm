@@ -21,6 +21,7 @@ export const employeeText = {
   actions: ['Thao tác', 'Actions'],
   viewDetail: ['Xem chi tiết', 'View detail'],
   delete: ['Xóa', 'Delete'],
+  addEmployee: ['Thêm nhân viên', 'Add employee'],
   emptyValue: ['-', '-'],
   searchPlaceholder: ['Tìm nhân viên...', 'Search employees...'],
   pageTitle: ['Nhân viên', 'Employees'],

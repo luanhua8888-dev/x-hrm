@@ -56,7 +56,7 @@ interface TableCustomProps<TData> {
 const copy = {
   vi: {
     number: 'STT',
-    filter: 'Lọc...',
+    filter: 'Tất cả',
     records: 'bản ghi',
     rows: 'dòng',
     page: 'Trang',
@@ -67,7 +67,7 @@ const copy = {
   },
   en: {
     number: 'No.',
-    filter: 'Filter...',
+    filter: 'All',
     records: 'records',
     rows: 'rows',
     page: 'Page',

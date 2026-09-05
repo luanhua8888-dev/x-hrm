@@ -35,6 +35,10 @@ export function EmployeeListRouteElement() {
   return withPageLoading(<EmployeeWorkspacePage />);
 }
 
+export function EmployeeCreateRouteElement() {
+  return withPageLoading(<EmployeeCreatePage />);
+}
+
 const LeaveMyLeavePage = lazy(() => import('@/components/leave/my-leave/MyLeavePage'));
 const LeaveRequestsPage = lazy(() => import('@/components/leave/requests/LeaveRequestsPage'));
 const LeaveCalendarPage = lazy(() => import('@/components/leave/calendar/LeaveCalendarPage'));
