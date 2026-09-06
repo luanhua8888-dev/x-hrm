@@ -5,6 +5,7 @@ import { PageLoading } from '@/components/feedback/PageLoading';
 const AccessDeniedPage = lazy(() => import('@/components/common/AccessDeniedPage'));
 const DashboardPage = lazy(() => import('@/components/dashboard/DashboardPage'));
 const EmployeeWorkspacePage = lazy(() => import('@/components/employees/EmployeeWorkspace'));
+const EmployeeCreatePage = lazy(() => import('@/components/employees/create/EmployeeCreatePage'));
 const LoginPage = lazy(() => import('@/components/login/LoginPage'));
 const NotFoundPage = lazy(() => import('@/components/common/NotFoundPage'));
 const OrganizationPage = lazy(() => import('@/components/organization/OrganizationPage'));
